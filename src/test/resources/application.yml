@@ -1,0 +1,18 @@
+app: 
+  name: IntraleFunction
+  microservices: true
+  instantiate:
+    factory: false
+    provider: false
+  activity:
+    enabled: ${validate.enabled:false}
+    maxInactivity: 60000
+    fixedDelay: 30s
+    initialDelay: 15s
+  aws:
+    clientId: 1ve1nokbjnmhk1adiben0a9iao
+    userPoolId: us-east-2_rLbLF8HCb
+    region: us-east-2
+  database:
+    access: ${database.access}
+    secret: ${database.secret}
