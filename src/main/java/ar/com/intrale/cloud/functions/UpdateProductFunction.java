@@ -6,6 +6,9 @@ import java.util.Map;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.model.AttributeAction;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
@@ -19,6 +22,8 @@ import ar.com.intrale.cloud.messages.ProductResponse;
 @Singleton
 @Named(Function.UPDATE)
 public class UpdateProductFunction extends Function<ProductRequest, ProductResponse, AmazonDynamoDB> {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(UpdateProductFunction.class);
 
 	public static final String TABLE_NAME 		= "product";
 	

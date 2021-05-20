@@ -1,12 +1,12 @@
 package ar.com.intrale.cloud.functions;
 
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
@@ -16,19 +16,18 @@ import com.amazonaws.services.dynamodbv2.document.QueryOutcome;
 import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
-import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-import com.amazonaws.services.dynamodbv2.model.QueryRequest;
-import com.amazonaws.services.dynamodbv2.model.QueryResult;
 
 import ar.com.intrale.cloud.Function;
 import ar.com.intrale.cloud.FunctionException;
-import ar.com.intrale.cloud.messages.ProductEntity;
+import ar.com.intrale.cloud.messages.Product;
 import ar.com.intrale.cloud.messages.ProductRequest;
 import ar.com.intrale.cloud.messages.ProductResponse;
 
 @Singleton
 @Named(Function.READ)
 public class ReadProductFunction extends Function<ProductRequest, ProductResponse, AmazonDynamoDB> {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ReadProductFunction.class);
 
 	public static final String TABLE_NAME 		= "product";
 	
@@ -40,9 +39,6 @@ public class ReadProductFunction extends Function<ProductRequest, ProductRespons
     public static final String STOCK 			= "stock";
     public static final String PRICE 			= "price";
     
-    public static final String NUMERAL = "#";
-    public static final String TWO_POINTS = ":";
-	
 	
 	@Override
 	public ProductResponse execute(ProductRequest request) throws FunctionException {
@@ -63,7 +59,7 @@ public class ReadProductFunction extends Function<ProductRequest, ProductRespons
 		
 		while (iterator.hasNext()) {
 			Item item = (Item) iterator.next();
-			ProductEntity product = new ProductEntity();
+			Product product = new Product();
 			product.setProductId(Long.valueOf(item.getString(PRODUCT_ID)));
 			product.setDescription(item.getString(DESCRIPTION));
 			product.setDetails(item.getString(DETAILS));

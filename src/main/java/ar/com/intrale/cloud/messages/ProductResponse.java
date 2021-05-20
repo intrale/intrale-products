@@ -10,17 +10,17 @@ import io.micronaut.core.annotation.Introspected;
 public class ProductResponse extends Response {
 	
 	
-	private Collection<ProductEntity> products = new ArrayList<ProductEntity>();
+	private Collection<Product> products = new ArrayList<Product>();
 
-	public Collection<ProductEntity> getProducts() {
+	public Collection<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Collection<ProductEntity> products) {
+	public void setProducts(Collection<Product> products) {
 		this.products = products;
 	}
 	
-	public void add(ProductEntity product) {
+	public void add(Product product) {
 		products.add(product);
 	}
 	

@@ -39,25 +39,26 @@ import io.micronaut.test.annotation.MicronautTest;
 
 
 @MicronautTest
-public class ReadProductUnitTest extends ar.com.intrale.cloud.Test<AmazonDynamoDB> {
+public class ReadProductUnitTest extends ar.com.intrale.cloud.Test {
 	
 	private Boolean flag = Boolean.TRUE;
 
 	@Override
     public void beforeEach() {
-		if (provider==null) {
-	    	ListTablesResult listTablesResult = getListTablesResult();
-	
-	    	provider = Mockito.mock(AmazonDynamoDB.class);
-	    	
-	    	Mockito.when(provider.listTables(any(ListTablesRequest.class))).thenReturn(listTablesResult);
-	    	Mockito.when(provider.createTable(any())).thenReturn(new CreateTableResult());
-		}
+    	ListTablesResult listTablesResult = getListTablesResult();
+    	
+    	AmazonDynamoDB provider = Mockito.mock(AmazonDynamoDB.class);
+    	
+    	Mockito.when(provider.listTables(any(ListTablesRequest.class))).thenReturn(listTablesResult);
+    	Mockito.when(provider.createTable(any())).thenReturn(new CreateTableResult());
+    	
+    	applicationContext.registerSingleton(AmazonDynamoDB.class, provider);
     }
 	
 	@Override
 	public void afterEach() {
-		Mockito.reset(provider);
+		AmazonDynamoDB provider = applicationContext.getBean(AmazonDynamoDB.class);
+    	Mockito.reset(provider);
 	}
 
 	private ListTablesResult getListTablesResult() {
@@ -86,9 +87,8 @@ public class ReadProductUnitTest extends ar.com.intrale.cloud.Test<AmazonDynamoD
     
     @Test
     public void testCreateTableException() {
-    	Mockito.reset(provider);
-    	provider = null;
     	ListTablesResult listTablesResult = getListTablesResult();
+    	AmazonDynamoDB provider = applicationContext.getBean(AmazonDynamoDB.class);
     	provider = Mockito.mock(AmazonDynamoDB.class);
     	Mockito.when(provider.listTables(any(ListTablesRequest.class))).thenReturn(listTablesResult);
     	Mockito.when(provider.createTable(any())).thenThrow(ResourceInUseException.class);
@@ -107,6 +107,7 @@ public class ReadProductUnitTest extends ar.com.intrale.cloud.Test<AmazonDynamoD
     	ListTablesResult result = new ListTablesResult();
     	result.setTableNames(Arrays.asList(UpdateProductFunction.TABLE_NAME));
 
+    	AmazonDynamoDB provider = applicationContext.getBean(AmazonDynamoDB.class);
     	Mockito.when(provider.listTables()).thenReturn(result);
     	
     	QueryResult queryResult = new QueryResult();
@@ -139,6 +140,7 @@ public class ReadProductUnitTest extends ar.com.intrale.cloud.Test<AmazonDynamoD
     	ListTablesResult result = new ListTablesResult();
     	result.setTableNames(Arrays.asList(UpdateProductFunction.TABLE_NAME));
 
+    	AmazonDynamoDB provider = applicationContext.getBean(AmazonDynamoDB.class);
     	Mockito.when(provider.listTables()).thenReturn(result);
     	
     	ProductRequest request = new ProductRequest();

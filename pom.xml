@@ -7,13 +7,12 @@
   <parent>
     <groupId>ar.com.intrale.cloud</groupId>
     <artifactId>parent</artifactId>
-    <version>0.2.1</version>
+    <version>0.2.6</version>
   </parent>
 
   <properties>
   	<commons.version>${project.version}</commons.version>
   	<test.version>${project.version}</test.version>
-  	<dynamodb.version>1.11.812</dynamodb.version>
   
 	<database.access>${env.DATABASE_ACCESS}</database.access>
 	<database.secret>${env.DATABASE_SECRET}</database.secret>  
@@ -63,7 +62,7 @@
 	<dependency>
 		<groupId>com.amazonaws</groupId>
 		<artifactId>aws-java-sdk-dynamodb</artifactId>
-		<version>${dynamodb.version}</version>
+		<version>${aws-java-sdk-dynamodb.version}</version>
  	</dependency>
 	<dependency>
 		<groupId>ar.com.intrale.cloud</groupId>

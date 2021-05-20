@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 import edu.umd.cs.findbugs.annotations.NonNull;
 
-public class ProductEntity {
+public class Product {
 	private Long productId;
 	private String productName;
 	private String description;

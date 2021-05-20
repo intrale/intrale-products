@@ -1,16 +1,14 @@
 package ar.com.intrale.cloud.test.integration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 
 import ar.com.intrale.cloud.Function;
 import ar.com.intrale.cloud.IntraleFactory;
-import ar.com.intrale.cloud.messages.ProductEntity;
+import ar.com.intrale.cloud.messages.Product;
 import ar.com.intrale.cloud.messages.ProductRequest;
 import ar.com.intrale.cloud.messages.ProductResponse;
 import io.micronaut.context.annotation.Property;
@@ -20,11 +18,10 @@ import io.micronaut.test.annotation.MicronautTest;
 @MicronautTest(rebuildContext = true)
 @Property(name = IntraleFactory.FACTORY, value = "true")
 @Property(name = IntraleFactory.PROVIDER, value = "true")
-public class ProductIntegrationTest extends ar.com.intrale.cloud.Test<AmazonDynamoDB> {
+public class ProductIntegrationTest extends ar.com.intrale.cloud.Test {
 
 	@Override
     public void beforeEach() {
-		provider = applicationContext.getBean(AmazonDynamoDB.class);
     }
 	
 	@Override
@@ -63,7 +60,7 @@ public class ProductIntegrationTest extends ar.com.intrale.cloud.Test<AmazonDyna
         responseEvent = lambda.execute(makeRequestEvent(request, Function.READ));
         response  = mapper.readValue(responseEvent.getBody(), ProductResponse.class);
 
-        ProductEntity productEntity = response.getProducts().iterator().next();
+        Product productEntity = response.getProducts().iterator().next();
         assertEquals(DUMMY_ID, productEntity.getProductId());
         assertEquals(CHANGED_VALUE, productEntity.getDescription());
     
