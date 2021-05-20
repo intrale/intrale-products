@@ -38,6 +38,8 @@ public class CreateProductFunction extends Function<ProductRequest, ProductRespo
 	public ProductResponse execute(ProductRequest request) throws FunctionException {
 		ProductResponse response = new ProductResponse();
 		
+		LOGGER.info("Inicializando Create");
+		
 		Map<String, AttributeValue> attributesValues = new HashMap<String, AttributeValue>(); 
 		
 		attributesValues.put(BUSINESS_NAME, new AttributeValue(request.getBusinessName()));
@@ -48,10 +50,12 @@ public class CreateProductFunction extends Function<ProductRequest, ProductRespo
 		attributesValues.put(STOCK, new AttributeValue(request.getStock().toString()));
 		attributesValues.put(PRICE, new AttributeValue(request.getPrice().toString()));
 		
+		LOGGER.info("Cargando data");
+		
 		provider.putItem(TABLE_NAME, attributesValues);
 		
 
-	   LOGGER.info("finalizando handler");
+	   LOGGER.info("Finalizando Create");
 	   
 	   
 	   
