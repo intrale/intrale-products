@@ -7,7 +7,7 @@ import ar.com.intrale.cloud.Response;
 import io.micronaut.core.annotation.Introspected;
 
 @Introspected
-public class ProductResponse extends Response {
+public class ReadProductResponse extends Response {
 	
 	
 	private Collection<Product> products = new ArrayList<Product>();

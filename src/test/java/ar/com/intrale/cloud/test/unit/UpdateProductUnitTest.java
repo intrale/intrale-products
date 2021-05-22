@@ -30,8 +30,8 @@ import ar.com.intrale.cloud.FunctionExceptionResponse;
 import ar.com.intrale.cloud.Lambda;
 import ar.com.intrale.cloud.Runner;
 import ar.com.intrale.cloud.functions.UpdateProductFunction;
-import ar.com.intrale.cloud.messages.ProductRequest;
-import ar.com.intrale.cloud.messages.ProductResponse;
+import ar.com.intrale.cloud.messages.CreateProductRequest;
+import ar.com.intrale.cloud.messages.CreateProductResponse;
 import io.micronaut.core.beans.BeanIntrospection;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.test.annotation.MicronautTest;
@@ -110,7 +110,7 @@ public class UpdateProductUnitTest extends ar.com.intrale.cloud.Test {
     	AmazonDynamoDB provider = applicationContext.getBean(AmazonDynamoDB.class);
     	Mockito.when(provider.listTables()).thenReturn(result);
     	
-    	ProductRequest request = new ProductRequest();
+    	CreateProductRequest request = new CreateProductRequest();
     	request.setRequestId(DUMMY_VALUE);
         request.setBusinessName(DUMMY_VALUE);
         request.setProductId(new Long("1"));
@@ -127,7 +127,7 @@ public class UpdateProductUnitTest extends ar.com.intrale.cloud.Test {
         requestEvent.setBody(mapper.writeValueAsString(request));
         APIGatewayProxyResponseEvent responseEvent = lambda.execute(requestEvent);
         
-        ProductResponse response  = mapper.readValue(responseEvent.getBody(), ProductResponse.class);
+        CreateProductResponse response  = mapper.readValue(responseEvent.getBody(), CreateProductResponse.class);
         
         assertNotNull(response);
     }
@@ -140,7 +140,7 @@ public class UpdateProductUnitTest extends ar.com.intrale.cloud.Test {
     	AmazonDynamoDB provider = applicationContext.getBean(AmazonDynamoDB.class);
     	Mockito.when(provider.listTables()).thenReturn(result);
     	
-    	ProductRequest request = new ProductRequest();
+    	CreateProductRequest request = new CreateProductRequest();
     	//request.setRequestId(DUMMY_VALUE);
         request.setBusinessName(DUMMY_VALUE);
         request.setProductId(new Long("1"));

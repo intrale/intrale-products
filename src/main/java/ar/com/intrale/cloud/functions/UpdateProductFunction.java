@@ -16,12 +16,13 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValueUpdate;
 
 import ar.com.intrale.cloud.Function;
 import ar.com.intrale.cloud.FunctionException;
-import ar.com.intrale.cloud.messages.ProductRequest;
-import ar.com.intrale.cloud.messages.ProductResponse;
+import ar.com.intrale.cloud.messages.UpdateProductRequest;
+import ar.com.intrale.cloud.messages.UpdateProductResponse;
+import io.micronaut.core.util.StringUtils;
 
 @Singleton
 @Named(Function.UPDATE)
-public class UpdateProductFunction extends Function<ProductRequest, ProductResponse, AmazonDynamoDB> {
+public class UpdateProductFunction extends Function<UpdateProductRequest, UpdateProductResponse, AmazonDynamoDB> {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(UpdateProductFunction.class);
 
@@ -37,19 +38,20 @@ public class UpdateProductFunction extends Function<ProductRequest, ProductRespo
 	
 	
 	@Override
-	public ProductResponse execute(ProductRequest request) throws FunctionException {
-		ProductResponse response = new ProductResponse();
+	public UpdateProductResponse execute(UpdateProductRequest request) throws FunctionException {
+		UpdateProductResponse response = new UpdateProductResponse();
 		
 		Map<String, AttributeValue> keysValues = new HashMap<String, AttributeValue>(); 
-		keysValues.put(PRODUCT_ID, new AttributeValue(request.getProductId().toString()));
+		keysValues.put(PRODUCT_ID, new AttributeValue(request.getProductId()));
 		
 		Map<String, AttributeValueUpdate> attributesValues = new HashMap<String, AttributeValueUpdate>(); 
-		attributesValues.put(BUSINESS_NAME, new AttributeValueUpdate(new AttributeValue(request.getBusinessName()), AttributeAction.PUT));
-		attributesValues.put(PRODUCT_NAME, new AttributeValueUpdate(new AttributeValue(request.getProductName()), AttributeAction.PUT));
-		attributesValues.put(DESCRIPTION, new AttributeValueUpdate(new AttributeValue(request.getDescription()), AttributeAction.PUT));
-		attributesValues.put(DETAILS, new AttributeValueUpdate(new AttributeValue(request.getDetails()), AttributeAction.PUT));
-		attributesValues.put(STOCK, new AttributeValueUpdate(new AttributeValue(request.getStock().toString()), AttributeAction.PUT));
-		attributesValues.put(PRICE, new AttributeValueUpdate(new AttributeValue(request.getPrice().toString()), AttributeAction.PUT));
+		
+		putAttribute(attributesValues, BUSINESS_NAME, request.getBusinessName());
+		putAttribute(attributesValues, PRODUCT_NAME, request.getProductName());
+		putAttribute(attributesValues, DESCRIPTION, request.getDescription());
+		putAttribute(attributesValues, DETAILS, request.getDetails());
+		putAttribute(attributesValues, STOCK, request.getStock());
+		putAttribute(attributesValues, PRICE, request.getPrice());
 		
 		provider.updateItem(TABLE_NAME, keysValues, attributesValues);
 		
@@ -59,6 +61,13 @@ public class UpdateProductFunction extends Function<ProductRequest, ProductRespo
 	   
 	   
        return response;
+	}
+
+
+	private void putAttribute(Map<String, AttributeValueUpdate> attributesValues, String key, Object value) {
+		if ((value!=null)&&(!StringUtils.isEmpty(value.toString()))) {
+			attributesValues.put(key, new AttributeValueUpdate(new AttributeValue(value.toString()), AttributeAction.PUT));
+		}
 	}
 
 }

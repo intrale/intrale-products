@@ -14,12 +14,12 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
 import ar.com.intrale.cloud.Function;
 import ar.com.intrale.cloud.FunctionException;
-import ar.com.intrale.cloud.messages.ProductRequest;
-import ar.com.intrale.cloud.messages.ProductResponse;
+import ar.com.intrale.cloud.messages.DeleteProductRequest;
+import ar.com.intrale.cloud.messages.DeleteProductResponse;
 
 @Singleton
 @Named(Function.DELETE)
-public class DeleteProductFunction extends Function<ProductRequest, ProductResponse, AmazonDynamoDB> {
+public class DeleteProductFunction extends Function<DeleteProductRequest, DeleteProductResponse, AmazonDynamoDB> {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(DeleteProductFunction.class);
 	
@@ -38,14 +38,14 @@ public class DeleteProductFunction extends Function<ProductRequest, ProductRespo
 	
 	
 	@Override
-	public ProductResponse execute(ProductRequest request) throws FunctionException {
+	public DeleteProductResponse execute(DeleteProductRequest request) throws FunctionException {
 		
 		Map<String, AttributeValue> key = new HashMap<String, AttributeValue>();
 		key.put(PRODUCT_ID, new AttributeValue(request.getProductId().toString()));
 		
 		provider.deleteItem(TABLE_NAME, key);
 	   
-       return new ProductResponse();
+       return new DeleteProductResponse();
 	}
 
 }

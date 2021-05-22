@@ -20,12 +20,12 @@ import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
 import ar.com.intrale.cloud.Function;
 import ar.com.intrale.cloud.FunctionException;
 import ar.com.intrale.cloud.messages.Product;
-import ar.com.intrale.cloud.messages.ProductRequest;
-import ar.com.intrale.cloud.messages.ProductResponse;
+import ar.com.intrale.cloud.messages.ReadProductRequest;
+import ar.com.intrale.cloud.messages.ReadProductResponse;
 
 @Singleton
 @Named(Function.READ)
-public class ReadProductFunction extends Function<ProductRequest, ProductResponse, AmazonDynamoDB> {
+public class ReadProductFunction extends Function<ReadProductRequest, ReadProductResponse, AmazonDynamoDB> {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ReadProductFunction.class);
 
@@ -41,16 +41,16 @@ public class ReadProductFunction extends Function<ProductRequest, ProductRespons
     
 	
 	@Override
-	public ProductResponse execute(ProductRequest request) throws FunctionException {
+	public ReadProductResponse execute(ReadProductRequest request) throws FunctionException {
 		DynamoDB dynamoDB = new DynamoDB(provider);
 		Table table = dynamoDB.getTable(TABLE_NAME);
 		
-		ProductResponse response = new ProductResponse();
+		ReadProductResponse response = new ReadProductResponse();
 		
 		QuerySpec querySpec = new QuerySpec()
 				.withKeyConditionExpression(PRODUCT_ID + " = " + TWO_POINTS + PRODUCT_ID)
 				.withValueMap(new ValueMap()	
-						.withString(TWO_POINTS + PRODUCT_ID, request.getProductId().toString()));
+						.withString(TWO_POINTS + PRODUCT_ID, request.getProductId()));
 		
 		ItemCollection<QueryOutcome> items = table.query(querySpec);
 		
@@ -60,7 +60,7 @@ public class ReadProductFunction extends Function<ProductRequest, ProductRespons
 		while (iterator.hasNext()) {
 			Item item = (Item) iterator.next();
 			Product product = new Product();
-			product.setProductId(Long.valueOf(item.getString(PRODUCT_ID)));
+			product.setProductId(item.getString(PRODUCT_ID));
 			product.setDescription(item.getString(DESCRIPTION));
 			product.setDetails(item.getString(DETAILS));
 			product.setPrice(Double.valueOf(item.getString(PRICE)));

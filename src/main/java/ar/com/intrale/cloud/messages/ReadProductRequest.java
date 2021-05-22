@@ -2,9 +2,13 @@ package ar.com.intrale.cloud.messages;
 
 import javax.validation.constraints.NotBlank;
 
+import ar.com.intrale.cloud.Request;
 import edu.umd.cs.findbugs.annotations.NonNull;
+import io.micronaut.core.annotation.Introspected;
 
-public class Product {
+@Introspected
+public class ReadProductRequest extends Request {
+	
 	private String productId;
 	private String productName;
 	private String description;
@@ -12,8 +16,6 @@ public class Product {
 	private Long stock;
 	private Double price;
 	
-	@NonNull
-    @NotBlank
     public String getProductId() {
 		return productId;
 	}
@@ -22,8 +24,7 @@ public class Product {
 		this.productId = productId;
 	}
 
-	@NonNull
-    @NotBlank
+
 	public String getProductName() {
 		return productName;
 	}
@@ -48,8 +49,6 @@ public class Product {
 		this.details = details;
 	}
 
-	@NonNull
-    @NotBlank
 	public Long getStock() {
 		return stock;
 	}
@@ -58,8 +57,7 @@ public class Product {
 		this.stock = stock;
 	}
 
-	@NonNull
-    @NotBlank
+
 	public Double getPrice() {
 		return price;
 	}

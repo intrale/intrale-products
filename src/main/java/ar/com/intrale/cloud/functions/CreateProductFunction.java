@@ -2,6 +2,7 @@ package ar.com.intrale.cloud.functions;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -14,12 +15,12 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
 import ar.com.intrale.cloud.Function;
 import ar.com.intrale.cloud.FunctionException;
-import ar.com.intrale.cloud.messages.ProductRequest;
-import ar.com.intrale.cloud.messages.ProductResponse;
+import ar.com.intrale.cloud.messages.CreateProductRequest;
+import ar.com.intrale.cloud.messages.CreateProductResponse;
 
 @Singleton
 @Named(Function.CREATE)
-public class CreateProductFunction extends Function<ProductRequest, ProductResponse, AmazonDynamoDB> {
+public class CreateProductFunction extends Function<CreateProductRequest, CreateProductResponse, AmazonDynamoDB> {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(CreateProductFunction.class);
 
@@ -35,15 +36,17 @@ public class CreateProductFunction extends Function<ProductRequest, ProductRespo
 	
 	
 	@Override
-	public ProductResponse execute(ProductRequest request) throws FunctionException {
-		ProductResponse response = new ProductResponse();
+	public CreateProductResponse execute(CreateProductRequest request) throws FunctionException {
+		CreateProductResponse response = new CreateProductResponse();
 		
 		LOGGER.info("Inicializando Create");
 		
 		Map<String, AttributeValue> attributesValues = new HashMap<String, AttributeValue>(); 
 		
+		String productId = UUID.randomUUID().toString();
+		
 		attributesValues.put(BUSINESS_NAME, new AttributeValue(request.getBusinessName()));
-		attributesValues.put(PRODUCT_ID, new AttributeValue(request.getProductId().toString()));
+		attributesValues.put(PRODUCT_ID, new AttributeValue(productId));
 		attributesValues.put(PRODUCT_NAME, new AttributeValue(request.getProductName()));
 		attributesValues.put(DESCRIPTION, new AttributeValue(request.getDescription()));
 		attributesValues.put(DETAILS, new AttributeValue(request.getDetails()));
@@ -57,7 +60,7 @@ public class CreateProductFunction extends Function<ProductRequest, ProductRespo
 
 	   LOGGER.info("Finalizando Create");
 	   
-	   
+	   response.setProductId(productId);
 	   
        return response;
 	}

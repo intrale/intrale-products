@@ -7,7 +7,7 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import io.micronaut.core.annotation.Introspected;
 
 @Introspected
-public class ProductRequest extends Request {
+public class CreateProductRequest extends Request {
 	
 	private Long productId;
 	private String productName;
@@ -16,8 +16,6 @@ public class ProductRequest extends Request {
 	private Long stock;
 	private Double price;
 	
-	@NonNull
-    @NotBlank
     public Long getProductId() {
 		return productId;
 	}
