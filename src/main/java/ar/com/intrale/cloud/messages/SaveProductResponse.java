@@ -4,7 +4,7 @@ import ar.com.intrale.cloud.Response;
 import io.micronaut.core.annotation.Introspected;
 
 @Introspected
-public class CreateProductResponse extends Response {
+public class SaveProductResponse extends Response {
 	
 	private String productId;
 

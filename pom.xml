@@ -7,15 +7,22 @@
   <parent>
     <groupId>ar.com.intrale.cloud</groupId>
     <artifactId>parent</artifactId>
-    <version>0.2.6</version>
+    <version>0.4.5</version>
   </parent>
 
   <properties>
   	<commons.version>${project.version}</commons.version>
   	<test.version>${project.version}</test.version>
+  	
+  	<cognito.access>${env.COGNITO_ACCESS}</cognito.access>
+	<cognito.secret>${env.COGNITO_SECRET}</cognito.secret>  
   
 	<database.access>${env.DATABASE_ACCESS}</database.access>
 	<database.secret>${env.DATABASE_SECRET}</database.secret>  
+
+	<s3.access>${env.S3_ACCESS}</s3.access>
+	<s3.secret>${env.S3_SECRET}</s3.secret>  
+	<s3.bucketName>${env.S3_BUCKET_NAME}</s3.bucketName>  
 	  
   </properties>
 
@@ -143,6 +150,11 @@
               <artifactId>micronaut-validation</artifactId>
               <version>${micronaut.version}</version>
             </path>
+            <path>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${org.mapstruct.version}</version>
+            </path>            
           </annotationProcessorPaths>
           <compilerArgs>
             <arg>-Amicronaut.processing.group=ar.com.intrale.cloud</arg>
@@ -168,6 +180,11 @@
                   <artifactId>micronaut-validation</artifactId>
                   <version>${micronaut.version}</version>
                 </path>
+	            <path>
+	                <groupId>org.mapstruct</groupId>
+	                <artifactId>mapstruct-processor</artifactId>
+	                <version>${org.mapstruct.version}</version>
+	            </path>                        
               </annotationProcessorPaths>
             </configuration>
           </execution>
@@ -199,6 +216,7 @@
 					<configuration>
 					<excludes>
 						<exclude>ar/com/intrale/cloud/**/*Factory.class</exclude>
+						<exclude>ar/com/intrale/cloud/**/*MapperImpl*</exclude>
 					</excludes>
 					<rules>
 					  <rule>
