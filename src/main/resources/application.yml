@@ -36,4 +36,4 @@ app:
   s3:
     access: ${s3.access}
     secret: ${s3.secret}
-    bucketName: ${s3.bucketName}
+    bucketName: ${s3.bucketname}

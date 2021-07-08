@@ -22,7 +22,7 @@
 
 	<s3.access>${env.S3_ACCESS}</s3.access>
 	<s3.secret>${env.S3_SECRET}</s3.secret>  
-	<s3.bucketName>${env.S3_BUCKETNAME}</s3.bucketName>  
+	<s3.bucketname>${env.S3_BUCKET_NAME}</s3.bucketname>  
 	  
   </properties>
 
