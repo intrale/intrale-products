@@ -20,6 +20,9 @@ jobs:
             MAVEN_SERVER_PASSWORD: ${{ secrets.MAVEN_SERVER_PASSWORD }}
             DATABASE_ACCESS: ${{ secrets.DATABASE_ACCESS }} 
             DATABASE_SECRET: ${{ secrets.DATABASE_SECRET }} 
+            S3_ACCESS: ${{ secrets.S3_ACCESS }} 
+            S3_SECRET: ${{ secrets.S3_SECRET }} 
+            S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }} 
         run: | 
              mkdir -p ~/.m2
              echo "<settings><servers><server><id>github</id><username>${MAVEN_SERVER_USERNAME}</username><password>${MAVEN_SERVER_PASSWORD}</password></server></servers></settings>" > ~/.m2/settings.xml
