@@ -3,11 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>products</artifactId>
+  <version>0.5.6</version>
 
   <parent>
     <groupId>ar.com.intrale.cloud</groupId>
     <artifactId>parent</artifactId>
-    <version>0.4.6</version>
+    <version>0.5</version>
   </parent>
 
   <properties>
@@ -74,12 +75,12 @@
 	<dependency>
 		<groupId>ar.com.intrale.cloud</groupId>
 		<artifactId>commons</artifactId>
-		<version>${commons.version}</version>
+		<version>0.5.11</version>
 	</dependency>
 	<dependency>
 		<groupId>ar.com.intrale.cloud</groupId>
 		<artifactId>test</artifactId>
-		<version>${test.version}</version>
+		<version>0.5.1</version>
 		<scope>test</scope>
 	</dependency>
   </dependencies>
@@ -228,7 +229,8 @@
 					      <limit>
 					        <counter>LINE</counter>
 					        <value>COVEREDRATIO</value>
-					        <minimum>${test-covered-ratio}</minimum>
+					        <!-- minimum>${test-covered-ratio}</minimum-->
+					        <minimum>0.95</minimum>
 					      </limit>
 					    </limits>
 					  </rule>

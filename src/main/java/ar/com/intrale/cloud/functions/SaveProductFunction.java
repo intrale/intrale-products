@@ -1,5 +1,7 @@
 package ar.com.intrale.cloud.functions;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;

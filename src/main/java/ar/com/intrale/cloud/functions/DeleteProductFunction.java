@@ -41,5 +41,4 @@ public class DeleteProductFunction extends BaseFunction<DeleteProductRequest, Re
 	   
        return new Response();
 	}
-
 }

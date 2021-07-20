@@ -3,6 +3,7 @@ package ar.com.intrale.cloud.functions;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Base64;
+import java.util.Map;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

@@ -37,9 +37,7 @@ public class ReadProductFunction extends BaseFunction<ReadProductRequest, ReadPr
 	public static final String ATT = "ATT";
 	public static final String EQUAL = ATT + " = " + TWO_POINTS + ATT;
 	
-	
-	@Override
-	public ReadProductResponse execute(ReadProductRequest request) throws FunctionException {
+	public ReadProductResponse execute(ReadProductRequest request)	throws FunctionException {
 		ReadProductResponse response = new ReadProductResponse();
 		
 		DynamoDBMapper mapper = new DynamoDBMapper(provider);
