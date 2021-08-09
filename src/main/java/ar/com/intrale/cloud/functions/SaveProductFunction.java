@@ -1,8 +1,5 @@
 package ar.com.intrale.cloud.functions;
 
-import java.util.Map;
-
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -17,7 +14,6 @@ import ar.com.intrale.cloud.FunctionConst;
 import ar.com.intrale.cloud.FunctionResponseToHttpResponseBuilder;
 import ar.com.intrale.cloud.exceptions.FunctionException;
 import ar.com.intrale.cloud.mappers.ProductMapper;
-import ar.com.intrale.cloud.messages.SaveProductImageRequest;
 import ar.com.intrale.cloud.messages.SaveProductRequest;
 import ar.com.intrale.cloud.messages.SaveProductResponse;
 import ar.com.intrale.cloud.messages.builders.StringToSaveProductRequestBuilder;
@@ -29,9 +25,6 @@ public class SaveProductFunction extends BaseFunction<SaveProductRequest, SavePr
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(SaveProductFunction.class);
 
-	@Inject
-	private SaveProductImageFunction productImageFunction;
-	
 	@Override
 	public SaveProductResponse execute(SaveProductRequest request) throws FunctionException {
 		SaveProductResponse response = new SaveProductResponse();
@@ -42,12 +35,6 @@ public class SaveProductFunction extends BaseFunction<SaveProductRequest, SavePr
 		
 		Product product = ProductMapper.INSTANCE.saveProductRequestToProduct(request);
 		dynamoDBMapper.save(product);
-		
-		SaveProductImageRequest imageRequest = new SaveProductImageRequest();
-		imageRequest.setRequestId(request.getRequestId());
-		imageRequest.setId(product.getId());
-		imageRequest.setBase64Image(request.getBase64Image());
-		productImageFunction.execute(imageRequest);
 
 		response.setProductId(product.getId());
 	   LOGGER.info("Finalizando Create");

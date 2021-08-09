@@ -9,9 +9,7 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 
 import ar.com.intrale.cloud.FunctionConst;
 import ar.com.intrale.cloud.IntraleFactory;
-import ar.com.intrale.cloud.functions.GetProductImageFunction;
 import ar.com.intrale.cloud.messages.DeleteProductRequest;
-import ar.com.intrale.cloud.messages.GetProductImageRequest;
 import ar.com.intrale.cloud.messages.PriceMessage;
 import ar.com.intrale.cloud.messages.ReadProductRequest;
 import ar.com.intrale.cloud.messages.ReadProductResponse;
@@ -39,12 +37,12 @@ public class ProductIntegrationTest extends ar.com.intrale.cloud.Test {
     @Test
     public void test() throws Exception {
     	SaveProductRequest request = new SaveProductRequest();
-    	request.setTitle(DUMMY_VALUE);
+    	request.setName(DUMMY_VALUE);
     	request.setDescription(DUMMY_VALUE);
     	request.setRequestId(DUMMY_VALUE);
     	request.setCategory(DUMMY_VALUE);
     	request.setStock(Long.valueOf(1));
-    	request.setBase64Image(IMAGE);
+    	//request.setBase64Image(IMAGE);
     	PriceMessage price = new PriceMessage();
     	price.setCurrencyAcronym(DUMMY_VALUE);
     	price.setUnitPrice(Double.valueOf(1));
@@ -58,7 +56,7 @@ public class ProductIntegrationTest extends ar.com.intrale.cloud.Test {
         ReadProductRequest readProductRequest = new ReadProductRequest();
         readProductRequest.setRequestId(DUMMY_VALUE);
         readProductRequest.setProductId(createProductResponse.getProductId()); 
-        readProductRequest.setTitle(DUMMY_VALUE);
+        readProductRequest.setName(DUMMY_VALUE);
         readProductRequest.setDescription(DUMMY_VALUE);
         readProductRequest.setFromStock(Long.valueOf(1)); 
         readProductRequest.setToStock(Long.valueOf(1)); 
@@ -74,7 +72,7 @@ public class ProductIntegrationTest extends ar.com.intrale.cloud.Test {
         String dummyOtherValue = DUMMY_VALUE + "_OTHER";
         readProductRequest.setRequestId(DUMMY_VALUE);
         readProductRequest.setProductId(dummyOtherValue); 
-        readProductRequest.setTitle(dummyOtherValue);
+        readProductRequest.setName(dummyOtherValue);
         readProductRequest.setDescription(dummyOtherValue);
         readProductRequest.setFromStock(Long.valueOf(2)); 
         readProductRequest.setToStock(Long.valueOf(0)); 
@@ -97,7 +95,7 @@ public class ProductIntegrationTest extends ar.com.intrale.cloud.Test {
         
     	SaveProductRequest updateRequest = new SaveProductRequest();
     	updateRequest.setProductId(createProductResponse.getProductId());
-    	updateRequest.setTitle(DUMMY_VALUE);
+    	updateRequest.setName(DUMMY_VALUE);
     	updateRequest.setDescription(DUMMY_VALUE);
     	updateRequest.setRequestId(DUMMY_VALUE);
     	updateRequest.setCategory(DUMMY_VALUE);
@@ -118,11 +116,6 @@ public class ProductIntegrationTest extends ar.com.intrale.cloud.Test {
         
         responseEvent = (APIGatewayProxyResponseEvent) lambda.execute(makeRequestEvent(deleteProductRequest, FunctionConst.DELETE));
         assertEquals(200, responseEvent.getStatusCode());
-        
-        GetProductImageRequest getProductImageRequest = new GetProductImageRequest();
-        getProductImageRequest.setRequestId(DUMMY_VALUE);
-        getProductImageRequest.setId(createProductResponse.getProductId());
-        Object response = lambda.execute(makeRequestEvent(getProductImageRequest, GetProductImageFunction.FUNCTION_NAME));
         
         System.out.println();
         

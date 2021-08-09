@@ -7,7 +7,10 @@ import io.micronaut.core.annotation.Introspected;
 public class ReadProductRequest extends Request {
 	
 	private String productId;
-	private String title;
+	
+	private String category;
+	
+	private String name;
 	private String description;
 	
 	private Long fromStock;
@@ -18,6 +21,12 @@ public class ReadProductRequest extends Request {
 	private Double fromPrice;
 	private Double toPrice;
 	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	public String getProductId() {
 		return productId;
 	}
@@ -25,11 +34,11 @@ public class ReadProductRequest extends Request {
 		this.productId = productId;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getDescription() {
 		return description;

@@ -76,7 +76,7 @@ public class ReadProductFunction extends BaseFunction<ReadProductRequest, ReadPr
 	 */
 	protected Boolean isNeedsToBeFiltered(ReadProductRequest request, Product product) {
 		Boolean productIdFilter = (!StringUtils.isEmpty(request.getProductId()) && !product.getId().equals(request.getProductId()));
-		Boolean titleFilter = (!StringUtils.isEmpty(request.getTitle()) && !product.getTitle().equals(request.getTitle()));
+		Boolean nameFilter = (!StringUtils.isEmpty(request.getName()) && !product.getName().equals(request.getName()));
 		Boolean descriptionFilter = (!StringUtils.isEmpty(request.getDescription()) && !product.getDescription().equals(request.getDescription()));
 
 		Boolean fromStockFilter = (!(request.getFromStock()==null) && !(product.getStock() >= request.getFromStock()));
@@ -87,7 +87,7 @@ public class ReadProductFunction extends BaseFunction<ReadProductRequest, ReadPr
 		Boolean fromPriceFilter = (!(request.getFromPrice()==null) && !(product.getPrice().getUnitPrice() >= request.getFromPrice()));
 		Boolean toPriceFilter = (!(request.getToPrice()==null) && !(product.getPrice().getUnitPrice() <= request.getToPrice()));
 		
-		Boolean needsToBeFiltered = (productIdFilter || titleFilter || descriptionFilter || fromStockFilter || toStockFilter || currencyAcronymFilter || fromPriceFilter || toPriceFilter);
+		Boolean needsToBeFiltered = (productIdFilter || nameFilter || descriptionFilter || fromStockFilter || toStockFilter || currencyAcronymFilter || fromPriceFilter || toPriceFilter);
 		return needsToBeFiltered;
 	}
 

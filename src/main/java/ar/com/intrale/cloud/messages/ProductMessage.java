@@ -3,7 +3,7 @@ package ar.com.intrale.cloud.messages;
 public class ProductMessage {
 	
 	private String id;
-	private String title;
+	private String name;
 	private String description;
 	private Long stock;
 	private PriceMessage price;
@@ -34,12 +34,12 @@ public class ProductMessage {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {

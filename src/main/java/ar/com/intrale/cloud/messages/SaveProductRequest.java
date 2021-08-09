@@ -10,32 +10,33 @@ import io.micronaut.core.annotation.Introspected;
 public class SaveProductRequest extends Request {
     
 	private String productId;
+
+	@NonNull
+    @NotBlank
+	private String category;
 	
 	@NonNull
     @NotBlank
-	private String title;
+	private String name;
 	
     @NonNull
     @NotBlank
 	private String description;
     
     @NonNull
-	private Long stock;
+	private PriceMessage price;
+
+    @NonNull
+	private PriceMessage oldPrice;
     
     @NonNull
-	private PriceMessage price;
-	
-	private String base64Image;
+	private Long stock;
     
-	@NonNull
-    @NotBlank
-	private String category;
-
-    public String getBase64Image() {
-		return base64Image;
+	public PriceMessage getOldPrice() {
+		return oldPrice;
 	}
-	public void setBase64Image(String base64Image) {
-		this.base64Image = base64Image;
+	public void setOldPrice(PriceMessage oldPrice) {
+		this.oldPrice = oldPrice;
 	}
 	public String getProductId() {
 		return productId;
@@ -43,11 +44,11 @@ public class SaveProductRequest extends Request {
 	public void setProductId(String productId) {
 		this.productId = productId;
 	}
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getDescription() {
 		return description;
