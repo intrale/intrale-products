@@ -18,7 +18,7 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
 import ar.com.intrale.cloud.BaseFunction;
 import ar.com.intrale.cloud.FunctionConst;
-import ar.com.intrale.cloud.FunctionResponseToHttpResponseBuilder;
+import ar.com.intrale.cloud.FunctionResponseToBase64HttpResponseBuilder;
 import ar.com.intrale.cloud.exceptions.FunctionException;
 import ar.com.intrale.cloud.mappers.ProductMapper;
 import ar.com.intrale.cloud.messages.ReadProductRequest;
@@ -29,7 +29,7 @@ import io.micronaut.core.util.StringUtils;
 
 @Singleton
 @Named(FunctionConst.READ)
-public class ReadProductFunction extends BaseFunction<ReadProductRequest, ReadProductResponse, AmazonDynamoDB, StringToReadProductRequestBuilder, FunctionResponseToHttpResponseBuilder> {
+public class ReadProductFunction extends BaseFunction<ReadProductRequest, ReadProductResponse, AmazonDynamoDB, StringToReadProductRequestBuilder, FunctionResponseToBase64HttpResponseBuilder> {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ReadProductFunction.class);
 	
