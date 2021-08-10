@@ -14,7 +14,7 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
 import ar.com.intrale.cloud.BaseFunction;
 import ar.com.intrale.cloud.FunctionConst;
-import ar.com.intrale.cloud.FunctionResponseToHttpResponseBuilder;
+import ar.com.intrale.cloud.FunctionResponseToBase64HttpResponseBuilder;
 import ar.com.intrale.cloud.Response;
 import ar.com.intrale.cloud.exceptions.FunctionException;
 import ar.com.intrale.cloud.messages.DeleteProductRequest;
@@ -22,7 +22,7 @@ import ar.com.intrale.cloud.messages.builders.StringToDeleteProductRequestBuilde
 
 @Singleton
 @Named(FunctionConst.DELETE)
-public class DeleteProductFunction extends BaseFunction<DeleteProductRequest, Response, AmazonDynamoDB, StringToDeleteProductRequestBuilder, FunctionResponseToHttpResponseBuilder> {
+public class DeleteProductFunction extends BaseFunction<DeleteProductRequest, Response, AmazonDynamoDB, StringToDeleteProductRequestBuilder, FunctionResponseToBase64HttpResponseBuilder> {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(DeleteProductFunction.class);
 	

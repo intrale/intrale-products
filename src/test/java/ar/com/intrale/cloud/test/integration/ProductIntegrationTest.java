@@ -49,7 +49,7 @@ public class ProductIntegrationTest extends ar.com.intrale.cloud.Test {
     	request.setPrice(price);
     	
         APIGatewayProxyResponseEvent responseEvent = (APIGatewayProxyResponseEvent) lambda.execute(makeRequestEvent(request, FunctionConst.SAVE));
-        SaveProductResponse createProductResponse  = mapper.readValue(responseEvent.getBody(), SaveProductResponse.class);
+        SaveProductResponse createProductResponse  = readEncodedValue(responseEvent.getBody(), SaveProductResponse.class);
         
         assertEquals(200, createProductResponse.getStatusCode());
         
@@ -64,7 +64,7 @@ public class ProductIntegrationTest extends ar.com.intrale.cloud.Test {
         readProductRequest.setToPrice(Double.valueOf(1)); 
         readProductRequest.setCurrencyAcronym(DUMMY_VALUE);
         responseEvent = (APIGatewayProxyResponseEvent) lambda.execute(makeRequestEvent(readProductRequest, FunctionConst.READ));
-        ReadProductResponse readProductResponse  = mapper.readValue(responseEvent.getBody(), ReadProductResponse.class);
+        ReadProductResponse readProductResponse  = readEncodedValue(responseEvent.getBody(), ReadProductResponse.class);
         
         assertEquals(200, readProductResponse.getStatusCode());
         assertTrue(readProductResponse.getProducts().size()==1);
@@ -80,7 +80,7 @@ public class ProductIntegrationTest extends ar.com.intrale.cloud.Test {
         readProductRequest.setToPrice(Double.valueOf(0)); 
         readProductRequest.setCurrencyAcronym(dummyOtherValue);
         responseEvent = (APIGatewayProxyResponseEvent) lambda.execute(makeRequestEvent(readProductRequest, FunctionConst.READ));
-        readProductResponse  = mapper.readValue(responseEvent.getBody(), ReadProductResponse.class);
+        readProductResponse  = readEncodedValue(responseEvent.getBody(), ReadProductResponse.class);
         
         assertEquals(200, readProductResponse.getStatusCode());
         assertTrue(readProductResponse.getProducts().size()==0);
@@ -88,7 +88,7 @@ public class ProductIntegrationTest extends ar.com.intrale.cloud.Test {
         readProductRequest = new ReadProductRequest();
         readProductRequest.setRequestId(DUMMY_VALUE);
         responseEvent = (APIGatewayProxyResponseEvent) lambda.execute(makeRequestEvent(readProductRequest, FunctionConst.READ));
-        readProductResponse  = mapper.readValue(responseEvent.getBody(), ReadProductResponse.class);
+        readProductResponse  = readEncodedValue(responseEvent.getBody(), ReadProductResponse.class);
         
         assertEquals(200, readProductResponse.getStatusCode());
         assertTrue(readProductResponse.getProducts().size()>0);        
@@ -106,7 +106,7 @@ public class ProductIntegrationTest extends ar.com.intrale.cloud.Test {
     	updateRequest.setPrice(price);
     	
         responseEvent = (APIGatewayProxyResponseEvent) lambda.execute(makeRequestEvent(updateRequest, FunctionConst.SAVE));
-        SaveProductResponse updateProductResponse  = mapper.readValue(responseEvent.getBody(), SaveProductResponse.class);
+        SaveProductResponse updateProductResponse  = readEncodedValue(responseEvent.getBody(), SaveProductResponse.class);
         
         assertEquals(200, updateProductResponse.getStatusCode());
 
