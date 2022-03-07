@@ -44,9 +44,7 @@ public class ReadProductFunction extends BaseFunction<ReadProductRequest, ReadPr
 		DynamoDBScanExpression dbScanExpression = new DynamoDBScanExpression();
 		
 		// dynamoDB filters
-		Map<String, AttributeValue> values = new HashMap<String, AttributeValue>();
-		values.put(TWO_POINTS + FunctionConst.BUSINESS_NAME, new AttributeValue().withS(request.getBusinessName()));
-		dbScanExpression.withFilterExpression(EQUAL.replaceAll(ATT, FunctionConst.BUSINESS_NAME)).withExpressionAttributeValues(values);
+		addEqualFilter(dbScanExpression, FunctionConst.BUSINESS_NAME, request.getBusinessName());
 		
 		PaginatedList<Product> list = mapper.scan(Product.class, dbScanExpression);
 		
@@ -66,6 +64,14 @@ public class ReadProductFunction extends BaseFunction<ReadProductRequest, ReadPr
 		}
 		
        return response;
+	}
+
+	private void addEqualFilter(DynamoDBScanExpression dbScanExpression, String property, String value) {
+		if (StringUtils.isNotEmpty(value)) {
+			Map<String, AttributeValue> values = new HashMap<String, AttributeValue>();
+			values.put(TWO_POINTS + property, new AttributeValue().withS(value));
+			dbScanExpression.withFilterExpression(EQUAL.replaceAll(ATT, property)).withExpressionAttributeValues(values);
+		}
 	}
 
 	/**

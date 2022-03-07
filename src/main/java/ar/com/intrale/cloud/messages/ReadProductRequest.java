@@ -1,10 +1,10 @@
 package ar.com.intrale.cloud.messages;
 
-import ar.com.intrale.cloud.Request;
+import ar.com.intrale.cloud.RequestRoot;
 import io.micronaut.core.annotation.Introspected;
 
 @Introspected
-public class ReadProductRequest extends Request {
+public class ReadProductRequest extends RequestRoot {
 	
 	private String productId;
 	

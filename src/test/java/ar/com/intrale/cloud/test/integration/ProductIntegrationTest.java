@@ -19,7 +19,7 @@ import io.micronaut.context.annotation.Property;
 import io.micronaut.test.annotation.MicronautTest;
 
 
-@MicronautTest(rebuildContext = true)
+@MicronautTest(rebuildContext = true )
 @Property(name = IntraleFactory.FACTORY, value = "true")
 @Property(name = IntraleFactory.PROVIDER, value = "true")
 public class ProductIntegrationTest extends ar.com.intrale.cloud.Test {

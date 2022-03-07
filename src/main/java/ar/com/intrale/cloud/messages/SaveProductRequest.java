@@ -2,12 +2,12 @@ package ar.com.intrale.cloud.messages;
 
 import javax.validation.constraints.NotBlank;
 
-import ar.com.intrale.cloud.Request;
+import ar.com.intrale.cloud.RequestRoot;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import io.micronaut.core.annotation.Introspected;
 
 @Introspected
-public class SaveProductRequest extends Request {
+public class SaveProductRequest extends RequestRoot {
     
 	private String productId;
 

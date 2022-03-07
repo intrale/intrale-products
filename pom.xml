@@ -26,7 +26,7 @@
 
   <profiles>
   	<profile>
-  			<id>default</id>
+  			<id>service</id>
   			<activation>
   				<activeByDefault>true</activeByDefault>
   			</activation>
@@ -35,7 +35,211 @@
 				<validate.enabled>false</validate.enabled>
 			</properties>
 			
+			  <build>
+			  	<finalName>${project.artifactId}</finalName>
+			    <plugins>
+			      <plugin>
+			        <groupId>org.apache.maven.plugins</groupId>
+			        <artifactId>maven-surefire-plugin</artifactId>
+			        <version>${maven-surefire-plugin.version}</version>
+			        <configuration>
+			          <detail>true</detail>
+			          <trimStackTrace>false</trimStackTrace>
+			          <includes>
+			            <include>%regex[.*]</include>
+			          </includes>
+			          <excludes>
+			          	<exclude>**/ProductClientIntegrationTest</exclude>
+			          </excludes>
+			        </configuration>
+			      </plugin>
+			      <plugin>
+			        <groupId>org.apache.maven.plugins</groupId>
+			        <artifactId>maven-failsafe-plugin</artifactId>
+			        <version>${maven-failsafe-plugin.version}</version>
+			        <executions>
+			          <execution>
+			            <goals>
+			              <goal>integration-test</goal>
+			              <goal>verify</goal>
+			            </goals>
+			          </execution>
+			        </executions>
+			      </plugin>
+			      <plugin>
+			        <groupId>org.apache.maven.plugins</groupId>
+			        <artifactId>maven-compiler-plugin</artifactId>
+			        <configuration>
+			          <!-- Uncomment to enable incremental compilation -->
+			          <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
+			          <excludes>**/services/**</excludes>
+			          
+			          <annotationProcessorPaths>
+			            <path>
+			              <groupId>io.micronaut</groupId>
+			              <artifactId>micronaut-inject-java</artifactId>
+			              <version>${micronaut.version}</version>
+			            </path>
+			            <path>
+			              <groupId>io.micronaut</groupId>
+			              <artifactId>micronaut-validation</artifactId>
+			              <version>${micronaut.version}</version>
+			            </path>
+			            <path>
+			                <groupId>org.mapstruct</groupId>
+			                <artifactId>mapstruct-processor</artifactId>
+			                <version>${org.mapstruct.version}</version>
+			            </path>            
+			          </annotationProcessorPaths>
+			          <compilerArgs>
+			            <arg>-Amicronaut.processing.group=ar.com.intrale.cloud</arg>
+			            <arg>-Amicronaut.processing.module=IntraleFunction</arg>
+			          </compilerArgs>
+			        </configuration>
+			        <executions>
+			          <execution>
+			            <id>test-compile</id>
+			            <goals>
+			              <goal>testCompile</goal>
+			            </goals>
+			            <configuration>
+			
+			              <annotationProcessorPaths>
+			                <path>
+			                  <groupId>io.micronaut</groupId>
+			                  <artifactId>micronaut-inject-java</artifactId>
+			                  <version>${micronaut.version}</version>
+			                </path>
+			                <path>
+			                  <groupId>io.micronaut</groupId>
+			                  <artifactId>micronaut-validation</artifactId>
+			                  <version>${micronaut.version}</version>
+			                </path>
+				            <path>
+				                <groupId>org.mapstruct</groupId>
+				                <artifactId>mapstruct-processor</artifactId>
+				                <version>${org.mapstruct.version}</version>
+				            </path>                        
+			              </annotationProcessorPaths>
+			            </configuration>
+			          </execution>
+			        </executions>
+			      </plugin>
+			    </plugins>
+			  </build>
   	</profile>
+  	<profile>
+  			<id>client</id>
+			<properties>
+				<application.env>cloud</application.env>
+				<validate.enabled>false</validate.enabled>
+			</properties>
+			
+			  <build>
+			  	<finalName>${project.artifactId}-client</finalName>
+			    <plugins>
+			      <plugin>
+			        <groupId>org.apache.maven.plugins</groupId>
+			        <artifactId>maven-surefire-plugin</artifactId>
+			        <version>${maven-surefire-plugin.version}</version>
+			        <configuration>
+			          <detail>true</detail>
+			          <trimStackTrace>false</trimStackTrace>
+			          <includes>
+			            <include>%regex[.*]</include>
+			          </includes>
+			          <excludes>
+			          	<exclude>**/ProductIntegrationTest</exclude>
+			          </excludes>
+			        </configuration>
+			      </plugin>
+			      <plugin>
+			        <groupId>org.apache.maven.plugins</groupId>
+			        <artifactId>maven-failsafe-plugin</artifactId>
+			        <version>${maven-failsafe-plugin.version}</version>
+			        <executions>
+			          <execution>
+			            <goals>
+			              <goal>integration-test</goal>
+			              <goal>verify</goal>
+			            </goals>
+			          </execution>
+			        </executions>
+			      </plugin>
+			      <plugin>
+			        <groupId>org.apache.maven.plugins</groupId>
+			        <artifactId>maven-compiler-plugin</artifactId>
+			        <configuration>
+			          <!-- Uncomment to enable incremental compilation -->
+			          <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
+			          <excludes>**/config/**</excludes>
+			          <excludes>**/functions/**</excludes>
+			          <excludes>**/mappers/**</excludes>
+			          <excludes>**/messages/**</excludes>
+			          <excludes>**/messages/builders/**</excludes>
+			          <excludes>**/models/**</excludes>
+			          
+			          
+			          <annotationProcessorPaths>
+			            <path>
+			              <groupId>io.micronaut</groupId>
+			              <artifactId>micronaut-inject-java</artifactId>
+			              <version>${micronaut.version}</version>
+			            </path>
+			            <path>
+			              <groupId>io.micronaut</groupId>
+			              <artifactId>micronaut-validation</artifactId>
+			              <version>${micronaut.version}</version>
+			            </path>
+			            <path>
+			                <groupId>org.mapstruct</groupId>
+			                <artifactId>mapstruct-processor</artifactId>
+			                <version>${org.mapstruct.version}</version>
+			            </path>            
+			          </annotationProcessorPaths>
+			          <compilerArgs>
+			            <arg>-Amicronaut.processing.group=ar.com.intrale.cloud</arg>
+			            <arg>-Amicronaut.processing.module=IntraleFunction</arg>
+			          </compilerArgs>
+			        </configuration>
+			        <executions>
+			          <execution>
+			            <id>test-compile</id>
+			            <goals>
+			              <goal>testCompile</goal>
+			            </goals>
+			            <configuration>
+			
+			              <annotationProcessorPaths>
+			                <path>
+			                  <groupId>io.micronaut</groupId>
+			                  <artifactId>micronaut-inject-java</artifactId>
+			                  <version>${micronaut.version}</version>
+			                </path>
+			                <path>
+			                  <groupId>io.micronaut</groupId>
+			                  <artifactId>micronaut-validation</artifactId>
+			                  <version>${micronaut.version}</version>
+			                </path>
+				            <path>
+				                <groupId>org.mapstruct</groupId>
+				                <artifactId>mapstruct-processor</artifactId>
+				                <version>${org.mapstruct.version}</version>
+				            </path>                        
+			              </annotationProcessorPaths>
+			            </configuration>
+			          </execution>
+			        </executions>
+			      </plugin>
+			    </plugins>
+			  </build>
+  	</profile>  	
+  	
+  	
+  	
+  	
+  	
+  	
   	<profile>
   		<id>local</id>
  			<properties>
@@ -80,10 +284,14 @@
 		<version>DEV</version>
 		<scope>test</scope>
 	</dependency>
+	<dependency>
+		<groupId>ar.com.intrale.cloud</groupId>
+		<artifactId>products-core</artifactId>
+		<version>DEV</version>
+	</dependency>
   </dependencies>
 
   <build>
-  	<finalName>${project.artifactId} </finalName>
 	<resources>
 		<resource>
 			<directory>src/main/resources</directory>
@@ -104,89 +312,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${maven-surefire-plugin.version}</version>
-        <configuration>
-          <detail>true</detail>
-          <trimStackTrace>false</trimStackTrace>
-          <includes>
-            <include>%regex[.*]</include>
-          </includes>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <version>${maven-failsafe-plugin.version}</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>integration-test</goal>
-              <goal>verify</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <!-- Uncomment to enable incremental compilation -->
-          <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
-          
-          <annotationProcessorPaths>
-            <path>
-              <groupId>io.micronaut</groupId>
-              <artifactId>micronaut-inject-java</artifactId>
-              <version>${micronaut.version}</version>
-            </path>
-            <path>
-              <groupId>io.micronaut</groupId>
-              <artifactId>micronaut-validation</artifactId>
-              <version>${micronaut.version}</version>
-            </path>
-            <path>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct-processor</artifactId>
-                <version>${org.mapstruct.version}</version>
-            </path>            
-          </annotationProcessorPaths>
-          <compilerArgs>
-            <arg>-Amicronaut.processing.group=ar.com.intrale.cloud</arg>
-            <arg>-Amicronaut.processing.module=IntraleFunction</arg>
-          </compilerArgs>
-        </configuration>
-        <executions>
-          <execution>
-            <id>test-compile</id>
-            <goals>
-              <goal>testCompile</goal>
-            </goals>
-            <configuration>
-
-              <annotationProcessorPaths>
-                <path>
-                  <groupId>io.micronaut</groupId>
-                  <artifactId>micronaut-inject-java</artifactId>
-                  <version>${micronaut.version}</version>
-                </path>
-                <path>
-                  <groupId>io.micronaut</groupId>
-                  <artifactId>micronaut-validation</artifactId>
-                  <version>${micronaut.version}</version>
-                </path>
-	            <path>
-	                <groupId>org.mapstruct</groupId>
-	                <artifactId>mapstruct-processor</artifactId>
-	                <version>${org.mapstruct.version}</version>
-	            </path>                        
-              </annotationProcessorPaths>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
 			<groupId>org.jacoco</groupId>
