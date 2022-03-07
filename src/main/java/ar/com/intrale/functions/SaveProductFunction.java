@@ -1,4 +1,4 @@
-package ar.com.intrale.cloud.functions;
+package ar.com.intrale.functions;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -13,11 +13,11 @@ import ar.com.intrale.cloud.BaseFunction;
 import ar.com.intrale.cloud.FunctionConst;
 import ar.com.intrale.cloud.FunctionResponseToBase64HttpResponseBuilder;
 import ar.com.intrale.cloud.exceptions.FunctionException;
-import ar.com.intrale.cloud.mappers.ProductMapper;
-import ar.com.intrale.cloud.messages.SaveProductRequest;
-import ar.com.intrale.cloud.messages.SaveProductResponse;
-import ar.com.intrale.cloud.messages.builders.StringToSaveProductRequestBuilder;
-import ar.com.intrale.cloud.models.Product;
+import ar.com.intrale.mappers.ProductMapper;
+import ar.com.intrale.messages.SaveProductRequest;
+import ar.com.intrale.messages.SaveProductResponse;
+import ar.com.intrale.messages.builders.StringToSaveProductRequestBuilder;
+import ar.com.intrale.models.Product;
 
 @Singleton
 @Named(FunctionConst.SAVE)

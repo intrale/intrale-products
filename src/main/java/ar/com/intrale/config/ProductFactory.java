@@ -1,4 +1,4 @@
-package ar.com.intrale.cloud.config;
+package ar.com.intrale.config;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -12,7 +12,7 @@ import io.micronaut.context.annotation.Requires;
 
 @Factory
 @Requires(property = IntraleFactory.FACTORY, value = IntraleFactory.TRUE, defaultValue = IntraleFactory.TRUE)
-public class ProductstFactory extends IntraleFactory<AmazonDynamoDB>{
+public class ProductFactory extends IntraleFactory<AmazonDynamoDB>{
 
 	@Bean @Requires(property = IntraleFactory.PROVIDER, value = IntraleFactory.TRUE, defaultValue = IntraleFactory.TRUE)
 	@Override

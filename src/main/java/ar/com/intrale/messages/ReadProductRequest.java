@@ -1,4 +1,4 @@
-package ar.com.intrale.cloud.messages;
+package ar.com.intrale.messages;
 
 import ar.com.intrale.cloud.RequestRoot;
 import io.micronaut.core.annotation.Introspected;

@@ -1,19 +1,20 @@
-package ar.com.intrale.cloud.messages;
+package ar.com.intrale.messages;
 
-import ar.com.intrale.cloud.RequestRoot;
+import ar.com.intrale.cloud.Response;
 import io.micronaut.core.annotation.Introspected;
 
 @Introspected
-public class DeleteProductRequest extends RequestRoot {
+public class SaveProductResponse extends Response {
 	
 	private String productId;
-	
-    public String getProductId() {
+
+	public String getProductId() {
 		return productId;
 	}
 
 	public void setProductId(String productId) {
 		this.productId = productId;
 	}
-
+	
+	
 }

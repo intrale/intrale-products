@@ -1,4 +1,4 @@
-package ar.com.intrale.cloud.test.integration;
+package ar.com.intrale.test.client;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -6,11 +6,11 @@ import javax.inject.Inject;
 
 import org.junit.jupiter.api.Test;
 
-import ar.com.intrale.cloud.services.ProductClient;
+import ar.com.intrale.services.ProductClient;
 import io.micronaut.test.annotation.MicronautTest;
 
 @MicronautTest(rebuildContext = true )
-public class ProductClientIntegrationTest /*extends ar.com.intrale.cloud.Test*/ {
+public class IntegrationTest {
 	
 	@Inject
 	private ProductClient productClient;

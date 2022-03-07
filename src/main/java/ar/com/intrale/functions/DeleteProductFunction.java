@@ -1,4 +1,4 @@
-package ar.com.intrale.cloud.functions;
+package ar.com.intrale.functions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,8 +17,8 @@ import ar.com.intrale.cloud.FunctionConst;
 import ar.com.intrale.cloud.FunctionResponseToBase64HttpResponseBuilder;
 import ar.com.intrale.cloud.Response;
 import ar.com.intrale.cloud.exceptions.FunctionException;
-import ar.com.intrale.cloud.messages.DeleteProductRequest;
-import ar.com.intrale.cloud.messages.builders.StringToDeleteProductRequestBuilder;
+import ar.com.intrale.messages.DeleteProductRequest;
+import ar.com.intrale.messages.builders.StringToDeleteProductRequestBuilder;
 
 @Singleton
 @Named(FunctionConst.DELETE)

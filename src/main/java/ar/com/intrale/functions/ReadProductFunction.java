@@ -1,4 +1,4 @@
-package ar.com.intrale.cloud.functions;
+package ar.com.intrale.functions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,11 +20,11 @@ import ar.com.intrale.cloud.BaseFunction;
 import ar.com.intrale.cloud.FunctionConst;
 import ar.com.intrale.cloud.FunctionResponseToBase64HttpResponseBuilder;
 import ar.com.intrale.cloud.exceptions.FunctionException;
-import ar.com.intrale.cloud.mappers.ProductMapper;
-import ar.com.intrale.cloud.messages.ReadProductRequest;
-import ar.com.intrale.cloud.messages.ReadProductResponse;
-import ar.com.intrale.cloud.messages.builders.StringToReadProductRequestBuilder;
-import ar.com.intrale.cloud.models.Product;
+import ar.com.intrale.mappers.ProductMapper;
+import ar.com.intrale.messages.ReadProductRequest;
+import ar.com.intrale.messages.ReadProductResponse;
+import ar.com.intrale.messages.builders.StringToReadProductRequestBuilder;
+import ar.com.intrale.models.Product;
 import io.micronaut.core.util.StringUtils;
 
 @Singleton

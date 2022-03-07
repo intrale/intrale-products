@@ -1,4 +1,4 @@
-package ar.com.intrale.cloud.models;
+package ar.com.intrale.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
 

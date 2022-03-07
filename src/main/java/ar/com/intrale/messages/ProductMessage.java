@@ -1,4 +1,4 @@
-package ar.com.intrale.cloud.messages;
+package ar.com.intrale.messages;
 
 public class ProductMessage {
 	

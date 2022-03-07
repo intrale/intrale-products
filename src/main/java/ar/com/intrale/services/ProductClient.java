@@ -1,4 +1,4 @@
-package ar.com.intrale.cloud.services;
+package ar.com.intrale.services;
 
 import static io.micronaut.http.HttpHeaders.ACCEPT;
 import static io.micronaut.http.HttpHeaders.USER_AGENT;
@@ -13,12 +13,12 @@ import ar.com.intrale.cloud.FunctionBuilder;
 import ar.com.intrale.cloud.FunctionConst;
 import ar.com.intrale.cloud.Response;
 import ar.com.intrale.cloud.exceptions.ClientResponseException;
-import ar.com.intrale.cloud.messages.DeleteProductRequest;
-import ar.com.intrale.cloud.messages.ProductMessage;
-import ar.com.intrale.cloud.messages.ReadProductRequest;
-import ar.com.intrale.cloud.messages.ReadProductResponse;
-import ar.com.intrale.cloud.messages.SaveProductRequest;
-import ar.com.intrale.cloud.messages.SaveProductResponse;
+import ar.com.intrale.messages.DeleteProductRequest;
+import ar.com.intrale.messages.ProductMessage;
+import ar.com.intrale.messages.ReadProductRequest;
+import ar.com.intrale.messages.ReadProductResponse;
+import ar.com.intrale.messages.SaveProductRequest;
+import ar.com.intrale.messages.SaveProductResponse;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.client.HttpClient;
