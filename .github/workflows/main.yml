@@ -43,6 +43,7 @@ jobs:
              mkdir -p ~/.m2
              echo "<settings><servers><server><id>github</id><username>${MAVEN_SERVER_USERNAME}</username><password>${MAVEN_SERVER_PASSWORD}</password></server></servers></settings>" > ~/.m2/settings.xml
              mvn clean compile package
+             mvn deploy -P client
       - name: deploy lambda
         if: (github.event.action == 'ping_parent') || (github.event.action == 'pong_parent') 
         uses: yvesgurcan/deploy-lambda-function@master
