@@ -2,8 +2,8 @@ app:
   name: IntraleFunction
   microservices: true
   instantiate:
-    factory: false
-    provider: false
+    factory: true
+    provider: true
   activity:
     enabled: ${validate.enabled:false}
     maxInactivity: 60000
@@ -28,3 +28,7 @@ app:
     access: ${s3.access}
     secret: ${s3.secret}
     bucketName: ${s3.bucketname}
+micronaut:
+    http:
+        client:
+            read-timeout: 30s

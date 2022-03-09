@@ -12,11 +12,11 @@ import org.slf4j.LoggerFactory;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
-import ar.com.intrale.cloud.BaseFunction;
-import ar.com.intrale.cloud.FunctionConst;
-import ar.com.intrale.cloud.FunctionResponseToBase64HttpResponseBuilder;
-import ar.com.intrale.cloud.Response;
-import ar.com.intrale.cloud.exceptions.FunctionException;
+import ar.com.intrale.BaseFunction;
+import ar.com.intrale.FunctionConst;
+import ar.com.intrale.FunctionResponseToBase64HttpResponseBuilder;
+import ar.com.intrale.Response;
+import ar.com.intrale.exceptions.FunctionException;
 import ar.com.intrale.messages.DeleteProductRequest;
 import ar.com.intrale.messages.builders.StringToDeleteProductRequestBuilder;
 

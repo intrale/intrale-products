@@ -16,10 +16,10 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedList;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
-import ar.com.intrale.cloud.BaseFunction;
-import ar.com.intrale.cloud.FunctionConst;
-import ar.com.intrale.cloud.FunctionResponseToBase64HttpResponseBuilder;
-import ar.com.intrale.cloud.exceptions.FunctionException;
+import ar.com.intrale.BaseFunction;
+import ar.com.intrale.FunctionConst;
+import ar.com.intrale.FunctionResponseToBase64HttpResponseBuilder;
+import ar.com.intrale.exceptions.FunctionException;
 import ar.com.intrale.mappers.ProductMapper;
 import ar.com.intrale.messages.ReadProductRequest;
 import ar.com.intrale.messages.ReadProductResponse;
@@ -85,15 +85,15 @@ public class ReadProductFunction extends BaseFunction<ReadProductRequest, ReadPr
 		Boolean nameFilter = (!StringUtils.isEmpty(request.getName()) && !product.getName().equals(request.getName()));
 		Boolean descriptionFilter = (!StringUtils.isEmpty(request.getDescription()) && !product.getDescription().equals(request.getDescription()));
 
-		Boolean fromStockFilter = (!(request.getFromStock()==null) && !(product.getStock() >= request.getFromStock()));
+		/*Boolean fromStockFilter = (!(request.getFromStock()==null) && !(product.getStock() >= request.getFromStock()));
 		Boolean toStockFilter = (!(request.getToStock()==null) && !(product.getStock() <= request.getToStock()));
 
 		Boolean currencyAcronymFilter = (!StringUtils.isEmpty(request.getCurrencyAcronym()) && !product.getPrice().getCurrencyAcronym().equals(request.getCurrencyAcronym()));
 		
 		Boolean fromPriceFilter = (!(request.getFromPrice()==null) && !(product.getPrice().getUnitPrice() >= request.getFromPrice()));
 		Boolean toPriceFilter = (!(request.getToPrice()==null) && !(product.getPrice().getUnitPrice() <= request.getToPrice()));
-		
-		Boolean needsToBeFiltered = (productIdFilter || nameFilter || descriptionFilter || fromStockFilter || toStockFilter || currencyAcronymFilter || fromPriceFilter || toPriceFilter);
+		*/
+		Boolean needsToBeFiltered = (productIdFilter || nameFilter || descriptionFilter /*|| fromStockFilter || toStockFilter || currencyAcronymFilter || fromPriceFilter || toPriceFilter*/);
 		return needsToBeFiltered;
 	}
 

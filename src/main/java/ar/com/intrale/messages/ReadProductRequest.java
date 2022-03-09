@@ -1,6 +1,6 @@
 package ar.com.intrale.messages;
 
-import ar.com.intrale.cloud.RequestRoot;
+import ar.com.intrale.RequestRoot;
 import io.micronaut.core.annotation.Introspected;
 
 @Introspected

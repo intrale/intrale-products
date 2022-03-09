@@ -9,16 +9,21 @@ import javax.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ar.com.intrale.cloud.FunctionBuilder;
-import ar.com.intrale.cloud.FunctionConst;
-import ar.com.intrale.cloud.Response;
-import ar.com.intrale.cloud.exceptions.ClientResponseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import ar.com.intrale.FunctionBuilder;
+import ar.com.intrale.FunctionConst;
+import ar.com.intrale.Response;
+import ar.com.intrale.exceptions.ClientResponseException;
+import ar.com.intrale.exceptions.FunctionException;
 import ar.com.intrale.messages.DeleteProductRequest;
-import ar.com.intrale.messages.ProductMessage;
 import ar.com.intrale.messages.ReadProductRequest;
 import ar.com.intrale.messages.ReadProductResponse;
 import ar.com.intrale.messages.SaveProductRequest;
 import ar.com.intrale.messages.SaveProductResponse;
+import io.micronaut.core.util.StringUtils;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.client.HttpClient;
@@ -34,67 +39,81 @@ public class ProductClient {
 	@Inject
 	private HttpClient httpClient;
 	
-	public ProductMessage read(String requestId, String productId) {
-		
-		
-		ReadProductRequest readProductRequest = new ReadProductRequest();
-		readProductRequest.setRequestId(requestId);
-		readProductRequest.setProductId(productId);
+   	@Inject
+   	protected ObjectMapper mapper;
+	
+	public ReadProductResponse read(String businessname, ReadProductRequest readProductRequest) throws ClientResponseException, JsonMappingException, JsonProcessingException {
 		
 		HttpRequest<ReadProductRequest> request = HttpRequest.POST("/dev/products", readProductRequest)
 				.header(ACCEPT, "application/json")
 				.header(USER_AGENT, "Micronaut HTTP Client")
-				.header(FunctionBuilder.HEADER_FUNCTION, FunctionConst.READ);
+				.header(FunctionBuilder.HEADER_FUNCTION, FunctionConst.READ)
+				.header(FunctionBuilder.HEADER_BUSINESS_NAME, businessname);
 
-		
-		HttpResponse<ReadProductResponse> readProductResponse = httpClient.toBlocking().exchange(request, ReadProductResponse.class);
-		
-		return readProductResponse.body().getProducts().iterator().next();
+		try {
+			HttpResponse<String> response = httpClient.toBlocking().exchange(request, String.class);
+			ReadProductResponse readProductResponse = mapper.readValue(response.body(), ReadProductResponse.class);
+			return readProductResponse;
+		} catch (HttpClientResponseException e) {
+			LOGGER.error("statusCode:" + e.getStatus().getCode());
+			LOGGER.error("reason:" + e.getStatus().getReason());
+			LOGGER.error("message:" + e.getMessage());
+			LOGGER.error("response:" + e.getResponse());
+			LOGGER.error("body:" + e.getResponse().getBody());
+			throw new ClientResponseException(e.getResponse().getBody(String.class).get());
+		} finally {
+			httpClient.refresh();
+		}
 	}
 	
 
 	
-	public String save(String requestId, String productId) throws ClientResponseException {
-		System.out.println("save 1");
+	public SaveProductResponse save(String businessname, SaveProductRequest saveProductRequest) throws ClientResponseException, JsonMappingException, JsonProcessingException {
 	
-		SaveProductRequest saveProductRequest = new SaveProductRequest();
-		saveProductRequest.setRequestId(requestId);
-		saveProductRequest.setProductId(productId);
-		
-		System.out.println("save 2");
-		
 		HttpRequest<SaveProductRequest> request = HttpRequest.POST("/dev/products", saveProductRequest)
 				.header(ACCEPT, "application/json")
 				.header(USER_AGENT, "Micronaut HTTP Client")
-				.header(FunctionBuilder.HEADER_FUNCTION, FunctionConst.SAVE);
-
-		System.out.println("save 3");
+				.header(FunctionBuilder.HEADER_FUNCTION, FunctionConst.SAVE)
+				.header(FunctionBuilder.HEADER_BUSINESS_NAME, businessname);
+		
 		
 		try {
-			HttpResponse<SaveProductResponse> response = httpClient.toBlocking().exchange(request, SaveProductResponse.class);
-			System.out.println("save 4");
-			return response.body().getProductId();
+			HttpResponse<String> response = httpClient.toBlocking().exchange(request, String.class);
+			SaveProductResponse saveProductResponse = mapper.readValue(response.body(), SaveProductResponse.class);
+			return saveProductResponse;
 		} catch (HttpClientResponseException e) {
-			LOGGER.error("Ocurrio un error=> statusCode:" + e.getStatus().toString() + ", body:" + e.getResponse().body());
-			throw new ClientResponseException("nada");
+			LOGGER.error("statusCode:" + e.getStatus().getCode());
+			LOGGER.error("reason:" + e.getStatus().getReason());
+			LOGGER.error("message:" + e.getMessage());
+			LOGGER.error("response:" + e.getResponse());
+			LOGGER.error("body:" + e.getResponse().getBody());
+			throw new ClientResponseException(e.getResponse().getBody(String.class).get());
+		} finally {
+			httpClient.refresh();
 		}
 		
 	}
 	
-	public void delete(String requestId, String productId) {
-		
-		DeleteProductRequest deleteProductRequest = new DeleteProductRequest();
-		deleteProductRequest.setRequestId(requestId);
-		deleteProductRequest.setProductId(productId);
+	public void delete(String businessname, DeleteProductRequest deleteProductRequest) throws ClientResponseException {
 		
 		HttpRequest<DeleteProductRequest> request = HttpRequest.POST("/dev/products", deleteProductRequest)
 				.header(ACCEPT, "application/json")
 				.header(USER_AGENT, "Micronaut HTTP Client")
-				.header(FunctionBuilder.HEADER_FUNCTION, FunctionConst.DELETE);
+				.header(FunctionBuilder.HEADER_FUNCTION, FunctionConst.DELETE)
+				.header(FunctionBuilder.HEADER_BUSINESS_NAME, businessname);
 
-		
-		HttpResponse<Response> saveProductResponse = httpClient.toBlocking().exchange(request, Response.class);
-		
+		try {
+			httpClient.toBlocking().exchange(request, Response.class);
+		} catch (HttpClientResponseException e) {
+			LOGGER.error("statusCode:" + e.getStatus().getCode());
+			LOGGER.error("reason:" + e.getStatus().getReason());
+			LOGGER.error("message:" + e.getMessage());
+			LOGGER.error("response:" + e.getResponse());
+			LOGGER.error("body:" + e.getResponse().getBody());
+			throw new ClientResponseException(StringUtils.EMPTY_STRING);
+		} finally {
+			httpClient.refresh();
+		}
 	}
 	
 	
