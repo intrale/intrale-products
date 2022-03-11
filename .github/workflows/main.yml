@@ -39,6 +39,8 @@ jobs:
             S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }} 
         run: | 
              sed -i "s/DEV/$VERSION/gi" pom.xml
+             sed -i "s/DEV/$VERSION/gi" ./services/pom.xml
+             sed -i "s/DEV/$VERSION/gi" ./client/pom.xml
              cat pom.xml        
              mkdir -p ~/.m2
              echo "<settings><servers><server><id>github</id><username>${MAVEN_SERVER_USERNAME}</username><password>${MAVEN_SERVER_PASSWORD}</password></server></servers></settings>" > ~/.m2/settings.xml
