@@ -1,4 +1,4 @@
-package ar.com.intrale.test.client;
+package ar.com.intrale;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 
 import ar.com.intrale.exceptions.ClientResponseException;
 import ar.com.intrale.messages.DeleteProductRequest;
+import ar.com.intrale.messages.PriceMessage;
+import ar.com.intrale.messages.ProductMessage;
 import ar.com.intrale.messages.ReadProductRequest;
 import ar.com.intrale.messages.ReadProductResponse;
 import ar.com.intrale.messages.SaveProductRequest;
@@ -19,9 +21,9 @@ import ar.com.intrale.services.ProductClient;
 import io.micronaut.test.annotation.MicronautTest;
 
 @MicronautTest(rebuildContext = true )
-public class IntegrationTest {
+public class ClientTest {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(IntegrationTest.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ClientTest.class);
 	
 	@Inject
 	private ProductClient productClient;
@@ -35,6 +37,12 @@ public class IntegrationTest {
     	saveProductRequest.setName(ar.com.intrale.Test.DUMMY_VALUE);
     	saveProductRequest.setDescription(ar.com.intrale.Test.DUMMY_VALUE);
     	saveProductRequest.setCategory(ar.com.intrale.Test.DUMMY_VALUE);
+    	saveProductRequest.setStock(Long.valueOf("1"));
+    	
+    	PriceMessage priceMessage = new PriceMessage();
+    	priceMessage.setCurrencyAcronym("$");
+    	priceMessage.setUnitPrice(Double.valueOf("10"));
+    	saveProductRequest.setPrice(priceMessage);
     	SaveProductResponse saveProductResponse = productClient.save(ar.com.intrale.Test.DUMMY_VALUE, saveProductRequest);
     	
     	assertNotNull(saveProductResponse);
@@ -47,6 +55,17 @@ public class IntegrationTest {
 		LOGGER.info("readProductResponse.getProducts().size():" + readProductResponse.getProducts().size());
     	assertTrue(readProductResponse.getProducts().size() == 1);
     	
+    	ProductMessage productMessage = readProductResponse.getProducts().iterator().next();
+    	
+    	assertNotNull(productMessage.getCategory());
+    	assertNotNull(productMessage.getDescription());
+    	assertNotNull(productMessage.getId());
+    	assertNotNull(productMessage.getName());
+    	assertNotNull(productMessage.getPrice());
+    	assertNotNull(productMessage.getStock());
+    	
+    	readProductResponse.add(productMessage);
+    	
 		DeleteProductRequest deleteProductRequest = new DeleteProductRequest();
 		deleteProductRequest.setRequestId(ar.com.intrale.Test.DUMMY_VALUE);
 		deleteProductRequest.setProductId(saveProductResponse.getProductId());
@@ -54,6 +73,20 @@ public class IntegrationTest {
 		productClient.delete(ar.com.intrale.Test.DUMMY_VALUE, deleteProductRequest);
 		
 		readProductResponse = productClient.read(ar.com.intrale.Test.DUMMY_VALUE, readProductRequest);
+		assertNotNull(readProductResponse);
+		LOGGER.info("readProductResponse.getProducts().size():" + readProductResponse.getProducts().size());
+		assertTrue(readProductResponse.getProducts().size() == 0);
+		
+		readProductResponse = productClient.read(ar.com.intrale.Test.DUMMY_VALUE, readProductRequest);
+		readProductRequest.setCategory(ar.com.intrale.Test.DUMMY_VALUE);
+		readProductRequest.setCurrencyAcronym(ar.com.intrale.Test.DUMMY_VALUE);
+		readProductRequest.setDescription(ar.com.intrale.Test.DUMMY_VALUE);
+		readProductRequest.setName(ar.com.intrale.Test.DUMMY_VALUE);
+		readProductRequest.setFromPrice(Double.valueOf("1"));
+		readProductRequest.setFromStock(Long.valueOf("1"));
+		readProductRequest.setToPrice(Double.valueOf("1"));
+		readProductRequest.setToStock(Long.valueOf("1"));
+		
 		assertNotNull(readProductResponse);
 		LOGGER.info("readProductResponse.getProducts().size():" + readProductResponse.getProducts().size());
 		assertTrue(readProductResponse.getProducts().size() == 0);

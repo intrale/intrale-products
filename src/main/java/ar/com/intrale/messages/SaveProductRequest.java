@@ -25,19 +25,10 @@ public class SaveProductRequest extends RequestRoot {
     
     @NonNull
 	private PriceMessage price;
-
-    @NonNull
-	private PriceMessage oldPrice;
     
     @NonNull
 	private Long stock;
     
-	public PriceMessage getOldPrice() {
-		return oldPrice;
-	}
-	public void setOldPrice(PriceMessage oldPrice) {
-		this.oldPrice = oldPrice;
-	}
 	public String getProductId() {
 		return productId;
 	}

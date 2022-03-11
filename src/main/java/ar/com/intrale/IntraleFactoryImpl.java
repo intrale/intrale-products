@@ -11,7 +11,7 @@ import io.micronaut.context.annotation.Requires;
 
 @Factory
 @Requires(property = IntraleFactory.FACTORY, value = IntraleFactory.TRUE, defaultValue = IntraleFactory.TRUE)
-public class ProductFactory extends IntraleFactory<AmazonDynamoDB>{
+public class IntraleFactoryImpl extends IntraleFactory<AmazonDynamoDB>{
 
 	@Bean @Requires(property = IntraleFactory.PROVIDER, value = IntraleFactory.TRUE, defaultValue = IntraleFactory.TRUE)
 	@Override

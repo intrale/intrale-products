@@ -19,16 +19,9 @@ public class Product {
 	private String name;
 	private String description;
 	private Price price;
-	private Price oldPrice;
 
 	private Long stock;
 
-	public Price getOldPrice() {
-		return oldPrice;
-	}
-	public void setOldPrice(Price oldPrice) {
-		this.oldPrice = oldPrice;
-	}
 	public String getBusinessName() {
 		return businessName;
 	}

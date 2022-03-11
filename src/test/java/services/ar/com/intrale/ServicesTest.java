@@ -1,4 +1,4 @@
-package ar.com.intrale.test.services;
+package ar.com.intrale;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 
-import ar.com.intrale.FunctionConst;
-import ar.com.intrale.IntraleFactory;
 import ar.com.intrale.messages.DeleteProductRequest;
 import ar.com.intrale.messages.PriceMessage;
 import ar.com.intrale.messages.ReadProductRequest;
@@ -22,7 +20,7 @@ import io.micronaut.test.annotation.MicronautTest;
 @MicronautTest(rebuildContext = true )
 @Property(name = IntraleFactory.FACTORY, value = "true")
 @Property(name = IntraleFactory.PROVIDER, value = "true")
-public class IntegrationTest extends ar.com.intrale.Test {
+public class ServicesTest extends ar.com.intrale.Test {
 
 	@Override
     public void beforeEach() {
