@@ -15,9 +15,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ar.com.intrale.FunctionBuilder;
 import ar.com.intrale.FunctionConst;
-import ar.com.intrale.Response;
+import ar.com.intrale.FunctionExceptionResponse;
 import ar.com.intrale.exceptions.ClientResponseException;
-import ar.com.intrale.exceptions.FunctionException;
 import ar.com.intrale.messages.DeleteProductRequest;
 import ar.com.intrale.messages.ReadProductRequest;
 import ar.com.intrale.messages.ReadProductResponse;
@@ -69,7 +68,7 @@ public class ProductClient {
 
 	
 	public SaveProductResponse save(String businessname, SaveProductRequest saveProductRequest) throws ClientResponseException, JsonMappingException, JsonProcessingException {
-	
+		
 		HttpRequest<SaveProductRequest> request = HttpRequest.POST("/dev/products", saveProductRequest)
 				.header(ACCEPT, "application/json")
 				.header(USER_AGENT, "Micronaut HTTP Client")
@@ -103,7 +102,7 @@ public class ProductClient {
 				.header(FunctionBuilder.HEADER_BUSINESS_NAME, businessname);
 
 		try {
-			httpClient.toBlocking().exchange(request, Response.class);
+			httpClient.toBlocking().exchange(request, FunctionExceptionResponse.class);
 		} catch (HttpClientResponseException e) {
 			LOGGER.error("statusCode:" + e.getStatus().getCode());
 			LOGGER.error("reason:" + e.getStatus().getReason());
