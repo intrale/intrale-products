@@ -12,23 +12,11 @@
   </parent>
 
 	<modules>
+		<module>core</module>
 		<module>services</module>
 		<module>client</module>
 	</modules>
-
-  <properties>
-  	
-  	<cognito.access>${env.COGNITO_ACCESS}</cognito.access>
-	<cognito.secret>${env.COGNITO_SECRET}</cognito.secret>  
   
-	<database.access>${env.DATABASE_ACCESS}</database.access>
-	<database.secret>${env.DATABASE_SECRET}</database.secret>  
-
-	<s3.access>${env.S3_ACCESS}</s3.access>
-	<s3.secret>${env.S3_SECRET}</s3.secret>  
-	<s3.bucketname>${env.S3_BUCKET_NAME}</s3.bucketname>  
-	  
-  </properties>
   <repositories>
     <repository>
       <id>jcenter.bintray.com</id>
@@ -48,15 +36,11 @@
   </distributionManagement>
 
   <dependencies>
-	<dependency>
-		<groupId>com.amazonaws</groupId>
-		<artifactId>aws-java-sdk-dynamodb</artifactId>
-		<version>${aws-java-sdk-dynamodb.version}</version>
- 	</dependency>
-	<dependency>
+  	<dependency>
 		<groupId>ar.com.intrale</groupId>
 		<artifactId>commons</artifactId>
 		<version>DEV</version>
+		<scope>provided</scope>
 	</dependency>
 	<dependency>
 		<groupId>ar.com.intrale</groupId>
@@ -64,13 +48,6 @@
 		<version>DEV</version>
 		<scope>test</scope>
 	</dependency>
-	<dependency>
-	    <groupId>io.projectreactor</groupId>
-	    <artifactId>reactor-core</artifactId>
-	    <version>3.4.15</version>
-	</dependency>
-
-	
   </dependencies>
  
 </project>

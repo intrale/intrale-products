@@ -1,4 +1,4 @@
-package ar.com.intrale.services;
+package ar.com.intrale.client;
 
 import static io.micronaut.http.HttpHeaders.ACCEPT;
 import static io.micronaut.http.HttpHeaders.USER_AGENT;

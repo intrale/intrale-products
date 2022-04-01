@@ -1,18 +1,9 @@
 app: 
   name: IntraleFunction
-  microservices: false
+  microservices: true
   instantiate:
     factory: true
     provider: true
-    create: true
-    delete: true
-    read: true
-    update: true
-  security:
-    create: adminProducts
-    delete: adminProducts
-    read: adminProducts
-    update: adminProducts
   activity:
     enabled: ${validate.enabled:false}
     maxInactivity: 60000
@@ -29,14 +20,10 @@ app:
     readTimeout: 2000
     urlPrefix: https://cognito-idp.
     urlMid: .amazonaws.com/
-    urlSufix: /.well-known/jwks.json
+    urlSufix: /.well-known/jwks.json    
   database:
     access: ${database.access}
     secret: ${database.secret}
-  s3:
-    access: ${s3.access}
-    secret: ${s3.secret}
-    bucketName: ${s3.bucketname}
 micronaut:
     http:
         client:

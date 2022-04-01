@@ -17,7 +17,7 @@ import ar.com.intrale.messages.ReadProductRequest;
 import ar.com.intrale.messages.ReadProductResponse;
 import ar.com.intrale.messages.SaveProductRequest;
 import ar.com.intrale.messages.SaveProductResponse;
-import ar.com.intrale.services.ProductClient;
+import ar.com.intrale.client.ProductClient;
 import io.micronaut.test.annotation.MicronautTest;
 
 @MicronautTest(rebuildContext = true )

@@ -2,42 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>products-client</artifactId>
+  <artifactId>products-core</artifactId>
 
   <parent>
     <groupId>ar.com.intrale</groupId>
     <artifactId>products</artifactId>
     <version>DEV</version>
   </parent>
-
-  <profiles>
-  	
-  	<profile>
-  			<!-- 
-  				Perfil cliente 
-  				Genera el paquete entregable para la publicacion de la libreria capaz de cosumir los servicios
-  			 -->
-  			<id>client</id>
-
-  			<activation>
-  				<activeByDefault>true</activeByDefault>
-  			</activation>
-
-			<properties>
-				<application.env>cloud</application.env>
-				<validate.enabled>false</validate.enabled>
-			</properties>
-
-  	</profile>
-  	
-  	<profile>
-  		<id>local</id>
- 			<properties>
-				<application.env>local</application.env>
-				<validate.enabled>true</validate.enabled>
-			</properties>
-  	</profile>
-  </profiles>
 
   <repositories>
     <repository>
@@ -58,16 +29,15 @@
   </distributionManagement>
 
   <build>
-    <finalName>${project.artifactId}-client</finalName>
-	
-		<plugins>
+    <finalName>${project.artifactId}</finalName>
+
+			    <plugins>
 			    
 			    <!-- Compilacion -->
 			      <plugin>
 			        <groupId>org.apache.maven.plugins</groupId>
 			        <artifactId>maven-compiler-plugin</artifactId>
 			        <configuration>
-	          
 			          <annotationProcessorPaths>
 			            <path>
 			              <groupId>io.micronaut</groupId>
@@ -162,6 +132,7 @@
 								    </limits>
 								  </rule>
 								</rules>
+								
 								</configuration>
 							</execution>
 						</executions>
@@ -191,22 +162,18 @@
 			            </goals>
 			          </execution>
 			        </executions>
+			        
 			      </plugin>
-		</plugins>
+		            <plugin>
+				        <groupId>io.micronaut.build</groupId>
+				        <artifactId>micronaut-maven-plugin</artifactId>
+				      </plugin>
+				      <plugin>
+				        <groupId>org.apache.maven.plugins</groupId>
+				        <artifactId>maven-shade-plugin</artifactId>
+				      </plugin>
+			    </plugins>
+
   </build>
-  
-  <dependencies>
-  	<dependency>
-		<groupId>ar.com.intrale</groupId>
-		<artifactId>products-core</artifactId>
-		<version>DEV</version>
-		<exclusions>
-			<exclusion>
-				<groupId>ar.com.intrale</groupId>
-				<artifactId>commons</artifactId>
-			</exclusion>
-		</exclusions>
-  	</dependency>
-  </dependencies>
 
 </project>
