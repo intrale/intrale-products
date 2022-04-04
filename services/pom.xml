@@ -12,6 +12,9 @@
 
   <properties>
   
+	<cognito.access>${env.COGNITO_ACCESS}</cognito.access>
+	<cognito.secret>${env.COGNITO_SECRET}</cognito.secret>    
+  
 	<database.access>${env.DATABASE_ACCESS}</database.access>
 	<database.secret>${env.DATABASE_SECRET}</database.secret>  
 
