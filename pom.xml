@@ -46,8 +46,8 @@
 	<dependency>
 		<groupId>ar.com.intrale</groupId>
 		<artifactId>test</artifactId>
-		<version>DEV</version>
-		<scope>DEV_TEST</scope>
+		<version>DEV_TEST</version>
+		<scope>test</scope>
 	</dependency>
   </dependencies>
  
