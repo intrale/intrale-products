@@ -4,11 +4,12 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>products</artifactId>
   <packaging>pom</packaging>
+  <version>DEV_PRODUCTS</version>
 
   <parent>
     <groupId>ar.com.intrale</groupId>
     <artifactId>parent</artifactId>
-    <version>DEV</version>
+    <version>DEV_PARENT</version>
   </parent>
 
 	<modules>
@@ -39,14 +40,14 @@
   	<dependency>
 		<groupId>ar.com.intrale</groupId>
 		<artifactId>commons</artifactId>
-		<version>DEV</version>
+		<version>DEV_COMMONS</version>
 		<scope>provided</scope>
 	</dependency>
 	<dependency>
 		<groupId>ar.com.intrale</groupId>
 		<artifactId>test</artifactId>
 		<version>DEV</version>
-		<scope>test</scope>
+		<scope>DEV_TEST</scope>
 	</dependency>
   </dependencies>
  
