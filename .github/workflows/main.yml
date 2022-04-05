@@ -115,10 +115,28 @@ jobs:
           repo: 'intrale'
           package-name: 'ar.com.intrale.products'
           min-versions-to-keep: 3
-          token: ${{ secrets.MAVEN_SERVER_PASSWORD }}             
-      - name: Call intrale-delivery
-        run: |
-             curl -X POST https://api.github.com/repos/intrale/intrale-delivery/dispatches \
-             -H 'Accept: application/vnd.github.everest-preview+json' \
-             -u ${{ secrets.MAVEN_SERVER_PASSWORD }} \
-             --data '{"event_type": "parent_new_version", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
+          token: ${{ secrets.MAVEN_SERVER_PASSWORD }}        
+      - name: Delete old packages
+        uses: actions/delete-package-versions@v3
+        with:
+          owner: 'llarreta'
+          repo: 'intrale'
+          package-name: 'ar.com.intrale.products-core'
+          min-versions-to-keep: 3
+          token: ${{ secrets.MAVEN_SERVER_PASSWORD }}               
+      - name: Delete old packages
+        uses: actions/delete-package-versions@v3
+        with:
+          owner: 'llarreta'
+          repo: 'intrale'
+          package-name: 'ar.com.intrale.products-services'
+          min-versions-to-keep: 3
+          token: ${{ secrets.MAVEN_SERVER_PASSWORD }}            
+      - name: Delete old packages
+        uses: actions/delete-package-versions@v3
+        with:
+          owner: 'llarreta'
+          repo: 'intrale'
+          package-name: 'ar.com.intrale.products-client'
+          min-versions-to-keep: 3
+          token: ${{ secrets.MAVEN_SERVER_PASSWORD }}            
