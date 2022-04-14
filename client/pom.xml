@@ -7,7 +7,7 @@
   <parent>
     <groupId>ar.com.intrale</groupId>
     <artifactId>products</artifactId>
-    <version>DEV_PRODUCTS</version>
+    <version>PRODUCTS_VERSION</version>
   </parent>
 
   <profiles>
@@ -199,14 +199,19 @@
   	<dependency>
 		<groupId>ar.com.intrale</groupId>
 		<artifactId>products-core</artifactId>
-		<version>DEV_PRODUCTS</version>
-		<exclusions>
-			<exclusion>
-				<groupId>ar.com.intrale</groupId>
-				<artifactId>commons</artifactId>
-			</exclusion>
-		</exclusions>
+		<version>PRODUCTS_VERSION</version>
   	</dependency>
+	<dependency>
+		<groupId>ar.com.intrale</groupId>
+		<artifactId>commons</artifactId>
+		<version>COMMONS_VERSION</version>
+	</dependency>
+	<dependency>
+		<groupId>ar.com.intrale</groupId>
+		<artifactId>test</artifactId>
+		<version>TEST_VERSION</version>
+		<scope>test</scope>
+	</dependency>  	
   </dependencies>
 
 </project>

@@ -3,7 +3,6 @@ package ar.com.intrale.messages;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import ar.com.intrale.Response;
 import io.micronaut.core.annotation.Introspected;
 
 @Introspected

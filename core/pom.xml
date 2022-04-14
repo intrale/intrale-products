@@ -7,7 +7,7 @@
   <parent>
     <groupId>ar.com.intrale</groupId>
     <artifactId>products</artifactId>
-    <version>DEV_PRODUCTS</version>
+    <version>PRODUCTS_VERSION</version>
   </parent>
 
   <repositories>
@@ -175,5 +175,13 @@
 			    </plugins>
 
   </build>
+  
+  <dependencies>
+  	<dependency>
+		<groupId>ar.com.intrale</groupId>
+		<artifactId>core</artifactId>
+		<version>CORE_VERSION</version>
+	</dependency>
+  </dependencies>
 
 </project>

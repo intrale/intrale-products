@@ -4,12 +4,12 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>products</artifactId>
   <packaging>pom</packaging>
-  <version>DEV_PRODUCTS</version>
+  <version>PRODUCTS_VERSION</version>
 
   <parent>
     <groupId>ar.com.intrale</groupId>
     <artifactId>parent</artifactId>
-    <version>DEV_PARENT</version>
+    <version>PARENT_VERSION</version>
   </parent>
 
 	<modules>
@@ -35,20 +35,4 @@
 	  <url>https://maven.pkg.github.com/intrale/repo</url>
 	</repository>
   </distributionManagement>
-
-  <dependencies>
-  	<dependency>
-		<groupId>ar.com.intrale</groupId>
-		<artifactId>commons</artifactId>
-		<version>DEV_COMMONS</version>
-		<scope>provided</scope>
-	</dependency>
-	<dependency>
-		<groupId>ar.com.intrale</groupId>
-		<artifactId>test</artifactId>
-		<version>DEV_TEST</version>
-		<scope>test</scope>
-	</dependency>
-  </dependencies>
- 
 </project>

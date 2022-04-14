@@ -2,7 +2,6 @@ package ar.com.intrale.messages;
 
 import javax.validation.constraints.NotBlank;
 
-import ar.com.intrale.RequestRoot;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import io.micronaut.core.annotation.Introspected;
 

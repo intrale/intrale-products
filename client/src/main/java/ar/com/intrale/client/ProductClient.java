@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ar.com.intrale.FunctionBuilder;
 import ar.com.intrale.FunctionConst;
-import ar.com.intrale.FunctionExceptionResponse;
+import ar.com.intrale.messages.FunctionExceptionResponse;
 import ar.com.intrale.exceptions.ClientResponseException;
 import ar.com.intrale.messages.DeleteProductRequest;
 import ar.com.intrale.messages.ReadProductRequest;
