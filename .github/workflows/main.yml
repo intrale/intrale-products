@@ -92,8 +92,13 @@ jobs:
           sed -i "s/TEST_VERSION/${TEST_VERSION}/gi" pom.xml
           sed -i "s/PRODUCTS_VERSION/${VERSION_TARGET}/gi" pom.xml
           sed -i "s/PRODUCTS_VERSION/${VERSION_TARGET}/gi" ./core/pom.xml
+          sed -i "s/CORE_VERSION/${CORE_VERSION}/gi" ./core/pom.xml
           sed -i "s/PRODUCTS_VERSION/${VERSION_TARGET}/gi" ./services/pom.xml
+          sed -i "s/COMMONS_VERSION/${COMMONS_VERSION}/gi" ./services/pom.xml
+          sed -i "s/TEST_VERSION/${TEST_VERSION}/gi" ./services/pom.xml
           sed -i "s/PRODUCTS_VERSION/${VERSION_TARGET}/gi" ./client/pom.xml
+          sed -i "s/CORE_VERSION/${CORE_VERSION}/gi" ./client/pom.xml
+          sed -i "s/COMMONS_VERSION/${COMMONS_VERSION}/gi" ./client/pom.xml
           mkdir -p ~/.m2
           echo "<settings><servers><server><id>github</id><username>${MAVEN_SERVER_USERNAME}</username><password>${MAVEN_SERVER_PASSWORD}</password></server></servers></settings>" > ~/.m2/settings.xml
           mvn clean compile package install
