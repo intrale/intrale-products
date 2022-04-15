@@ -11,12 +11,35 @@
     <artifactId>parent</artifactId>
     <version>PARENT_VERSION</version>
   </parent>
+	
+  <profiles>
+  	<profile>
+  		<id>default</id>
+	  	<activation>
+			<activeByDefault>true</activeByDefault>
+		</activation>
+		<modules>
+			<module>core</module>
+			<module>services</module>
+		</modules>
+  	</profile>
+  	<profile>
+  		<id>client</id>
+		<modules>
+			<module>core</module>
+			<module>client</module>
+		</modules>
+  	</profile>
+  	<profile>
+  		<id>all</id>
+		<modules>
+			<module>core</module>
+			<module>services</module>
+			<module>client</module>
+		</modules>
+  	</profile>
 
-	<modules>
-		<module>core</module>
-		<module>services</module>
-		<module>client</module>
-	</modules>
+  </profiles>
   
   <repositories>
     <repository>

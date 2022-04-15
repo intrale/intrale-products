@@ -26,7 +26,7 @@
   				Perfil principal 
   				Genera el paquete entregable para la publicacion de los microservicios
   			 -->
-  			<id>service</id>
+  			<id>default</id>
   			<activation>
   				<activeByDefault>true</activeByDefault>
   			</activation>
